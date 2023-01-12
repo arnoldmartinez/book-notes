@@ -86,6 +86,38 @@ var v1, v2, v3 = 'hello', v4 = 4, v5;
 Variables names are case sensitive. You can easily verify this statement using your JavaScript console. Try typing this, pressing *Enter* after each line:
 
 var case_matters = 'lower';
+
 var CASE_MATTERS = 'upper';
+
 case_matters;
+
 CASE_MATTERS;
+
+#### Operators
+
+Operators take one or two values (or variables), perform an operation, and return a value.
+
+> 1 + 2;
+**3**
+
+In the code:
+
+* + is the operator
+* The operation is addition
+* The input values are 1 and 2 (the input values are also called operands)
+* The result value is 3
+* The whole thing is called an expression
+
+| Operator symbol | Operation                           | Example     |
+|-----------------|-------------------------------------|-------------|
+| +               | Addition                            | 1 + 2       |
+| -               | Substraction                        | 99.99 - 11  |
+| *               | Multiplication                      | 2 * 3       |
+| /               | Division                            | 6 / 4       |
+| %               | Modulo, the remainder of a division | 6 % 3       |
+| ++              | Increment value by 1                | var b = a++ |
+| --              | Decrement a value by 1              | var b = a-- |
+
+var a = 1; is algo a operation; it's the simple assignment operation, and =  is the **simple assignment operator**.
+
+
