@@ -53,5 +53,30 @@ When an object inherits from another object, it usually adds new methods to the 
 
 In the preceding example, a *Programmer* object inherited all of the methods of the parent *Person* object. This means that both objects provide a *talk* method, among others. Now imagine that somewhere in your code there's a variable called *Bob*, and it just so happens that you don't know if *Bob* is a *Person* object or a *Programmer* object. You can still call the *talk* method on the *Bob* object and the code will work. This ability to call the same method on different objects and have each of them respond in their own way is called **polimorphism**
 
+### Primitive Data Types, Arrays, Loops, and Conditions
+#### Variables
 
+Using a variable requires two steps. You need to:
 
+* Declare the variable
+* Initialize it, that is, give it a value
+
+To declare a variable, you use the *var* statement, like this:
+
+var a;
+var thisIsAVariable;
+var _and_this_too;
+var mix12three;
+
+For the names of the variables, you can use any combination of letters, numbers, the underscore character, and the dollar sign. However, you can't start with a number, which means that this is invalid:
+
+var 2three4five;
+
+To initialize a variable means to give it a value for the first time. You have two way to do so:
+
+* Declare the variable first, then initialize it
+* Declare and initialize it with a single statement
+
+You can declare (and optionally initialize) several variables with a single *var* statement; just separate the declarations with a comma:
+
+var v1, v2, v3 = 'hello', v4 = 4, v5;
