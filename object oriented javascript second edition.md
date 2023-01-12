@@ -131,3 +131,14 @@ Any value that you use is of a certain type. In JavaScript, there are just a few
 * **Null**: This is another special data type that can have only one value, namely the *null* value. It means no value, an empty value, or nothing. The difference with *undefined* is that if a variable has a value *null*, it's still defined, it just so happens that its value is nothing. You'll see some examples shortly.
 
 Any value that doesn't belong to one of the five primitive types listed here is an object. Even *null* is considered an object, which is a little awkward - having an object that is actually nothing.
+
+#### Finding out the value type - the typeof operator
+
+If you want to know the type of a variable or a value, you use the special *typeof* operator. This operator returns a string that represents the data type. The return values of using *typeof* are one of the following:
+
+* "numbers"
+* *string"
+* "boolean"
+* "undefined*
+* "object"
+* "function"
