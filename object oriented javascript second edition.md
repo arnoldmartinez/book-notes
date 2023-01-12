@@ -80,3 +80,12 @@ To initialize a variable means to give it a value for the first time. You have t
 You can declare (and optionally initialize) several variables with a single *var* statement; just separate the declarations with a comma:
 
 var v1, v2, v3 = 'hello', v4 = 4, v5;
+
+#### Variables are case sensitive
+
+Variables names are case sensitive. You can easily verify this statement using your JavaScript console. Try typing this, pressing *Enter* after each line:
+
+var case_matters = 'lower';
+var CASE_MATTERS = 'upper';
+case_matters;
+CASE_MATTERS;
