@@ -120,4 +120,14 @@ In the code:
 
 var a = 1; is algo a operation; it's the simple assignment operation, and =  is the **simple assignment operator**.
 
+#### Primitive data types
 
+Any value that you use is of a certain type. In JavaScript, there are just a few primitive data types:
+
+* **Number**. This includes floating point numbers as well as integers. For example, these values are all numbers: 1, 100, 3.14
+* **String**: These consist of any number of charactes, for example "a", "one", and "one 2 three".
+* **Boolean**: This can be either *true* or *false*.
+* **Undefined**: When you try to access a variable that doesn't exist, you get the special value undefined. The same happens when you declare a variable withouth assigning a value to it yet. JavaScript initializes the variable behind the scenes with the value *undefined*. The undefined data type can only have one value - the special value *undefined*.
+* **Null**: This is another special data type that can have only one value, namely the *null* value. It means no value, an empty value, or nothing. The difference with *undefined* is that if a variable has a value *null*, it's still defined, it just so happens that its value is nothing. You'll see some examples shortly.
+
+Any value that doesn't belong to one of the five primitive types listed here is an object. Even *null* is considered an object, which is a little awkward - having an object that is actually nothing.
