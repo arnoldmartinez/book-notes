@@ -102,7 +102,7 @@ Operators take one or two values (or variables), perform an operation, and retur
 
 In the code:
 
-* + is the operator
+* **+** is the operator
 * The operation is addition
 * The input values are 1 and 2 (the input values are also called operands)
 * The result value is 3
