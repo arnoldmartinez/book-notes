@@ -142,3 +142,45 @@ If you want to know the type of a variable or a value, you use the special *type
 * "undefined*
 * "object"
 * "function"
+
+#### Numbers
+
+The simplest number is an integer, If you assign 1 to a variable and then use the *typeof* operator, it returns the string "number":
+
+var n = 1;
+typeof n;
+**"number"**
+
+#### Octal and hexadecimal numbers
+
+When a number starts with a 0, it's considered an octal number. For example, the octal *0377* is the decimal *255*:
+
+var n3 = 0377;
+typeof n3;
+**"number"**
+
+n3;
+**255**
+
+While you may not be intimately familiar with octal numbers, you've probably used hexadecimal values to define colors in CSS stylesheets.
+
+In CSS, you have several options to define a color, two of them being:
+
+* Using decimal values to specify the amount of R (red), G (green), and B (blue) ranging from 0 to 255.
+* Using hexadecimals and specifying two characters for each R, G, and B value.
+
+In JavaScript, you put *0x* before a hexadecimal value
+
+var n4 = 0x00;
+typeof n4;
+**"number"**
+
+n4;
+**0**
+
+#### Exponent literals
+
+1e1 (also written as *1e+1* or *1E1* or *1E+1*) represents the number one with one zero after it, or in other words, 10. Similarly, *2e+3* means the number 2 with 3 zeros after it, or 2000:
+
+1e1;
+**10**
