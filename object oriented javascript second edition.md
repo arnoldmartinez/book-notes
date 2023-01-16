@@ -184,3 +184,54 @@ n4;
 
 1e1;
 **10**
+
+#### Infinity
+
+There is a special value in JavaScript called *Infinity*. It represents a number too big for JavaScript to handle. *Infinity* is indeed a number, as typing *typeof Infinity* in the console will confirm. The biggest number JavaScript can handle is 1.7976931348623157e+308, while the smallest is 5e-324.
+
+Infinity;
+**Infinity**
+
+typeof Inifinity;
+**number**
+
+1e309;
+**Infinity**
+
+Dividing by zero gives you infinity:
+
+var a = 6 / 0;
+a;
+**Inifinity**
+
+How about the smallest? It's infinity with a minus sign in front of it; minus infinity:
+
+var i = -Infinity;
+i;
+**Infinity**
+
+typeof i;
+**"number"**
+
+Does this mean you can have something that's exactly twice as big as *Infinity*, from 0 up to infinity and then from 0 down to minus infinity? Well, not really. When you sum infinity and minus infinity, you don't get 0, but something that is called *NaN* (Not a Number):
+
+Infinity - Infinity;
+**NaN**
+
+-Infinity + Infinity;
+**NaN**
+
+Any other arithmetic operation with *Infinity* as one of the operands gives you *Infinity*:
+
+Infinity - 20;
+**Infinity**
+
+-Infinity * 3;
+**-Infinity**
+
+Infinity / 2;
+**Infinity**
+
+Infinity - 99999999999999999;
+**Infinity**
+
