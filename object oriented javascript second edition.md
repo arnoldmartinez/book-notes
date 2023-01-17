@@ -317,5 +317,5 @@ There are also strings with special meanings, as listed in the following table:
 | \t     | Tab                             | var s = "1\t2;"               |
 | \u     | \u allows you to use Unicode    | "\u421"                       |
 
-There are also additional characters that are rarely used: \b (backspace), \v (vertical tabl), and \f (form feed).
+There are also additional characters that are rarely used: \b(backspace), \v(vertical tab), and \f(form feed).
 
