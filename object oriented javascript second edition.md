@@ -265,4 +265,43 @@ var s = "some characters";
 typeof s;
 **"string"**
 
+#### String conversions
+
+When you use a number-like string(for example "1") as an operand in an arithmetic operation, the string is converted to a number behind the scenes. This works for all arithmetic operations except addition, because of its ambiguity:
+
+var s = '1';
+s = 3 * s;
+typeof s;
+**"number"**
+
+A lazy way to convert any number-like string to a number is to multiply it by 1 (another way is to use a function called *parseInt()*, as you'll see in the next chapter):
+
+var s = "100"; typeof s;
+**"string"**
+
+s = s * 1;
+**100**
+
+typeof s;
+**"number"**
+
+If the conversion fails, you'll get *NaN*:
+
+var movie = '101 dalmatians';
+movie * 1;
+**NaN**
+
+You convert a string to a number by multiplying by 1. The opposite - converting anything to a string - can be done by concatenating it with an empty string:
+
+var n = 1;
+typeof n;
+**"number"**
+
+n = "" + n;
+"1"
+
+typeof n;
+**"string"**
+
+
 
