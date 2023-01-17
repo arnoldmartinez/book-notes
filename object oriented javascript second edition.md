@@ -319,3 +319,18 @@ There are also strings with special meanings, as listed in the following table:
 
 There are also additional characters that are rarely used: \b(backspace), \v(vertical tab), and \f(form feed).
 
+#### Boolean
+
+There are only two values that belong to the Boolean data type:
+
+* true
+* false
+
+var b = true;
+typeof b;
+**"boolean"**
+
+var b = false;
+typeof b;
+**"boolean"**
+
