@@ -307,15 +307,15 @@ typeof n;
 
 There are also strings with special meanings, as listed in the following table:
 
-| String | Meaning                         | Example                       |
-|--------|-------------------------------- |-------------------------------|
+| String | Meaning                         | Example                          |
+|--------|-------------------------------- |----------------------------------|
 | \ \     | \ is the scape character.       | var s = "1\ \2";                |
-| \ '     | Simple quotes inside the string | var s = 'I don\ 't know';      |
+| \ '     | Simple quotes inside the string | var s = 'I don\ 't know';       |
 | \ "     | Quotes inside the string        | var s = "\ "Hello\ ", he said." |
-| \n     | End of line                     | var s = '\n1\n2';              |
-| \r     | Carriage return                 | var = '1\r2';                 |
-| \t     | Tab                             | var s = "1\t2;"               |
-| \u     | \u allows you to use Unicode    | "\u421"                       |
+| \n     | End of line                     | var s = '\n1\n2';                |
+| \r     | Carriage return                 | var = '1\r2';                    |
+| \t     | Tab                             | var s = "1\t2;"                  |
+| \u     | \u allows you to use Unicode    | "\u421"                          |
 
 There are also additional characters that are rarely used: \b(backspace), \v(vertical tab), and \f(form feed).
 
@@ -333,4 +333,70 @@ typeof b;
 var b = false;
 typeof b;
 **"boolean"**
+
+#### Logical operators
+
+There are three operators, called logical operators, that work with Boolean values. These are:
+
+* ! - logical NOT(negation)
+* && - logical AND
+* || - logical OR
+
+When something is not true, it must be false. Here's how this is expressed using the logical ! operator:
+
+var b = !true;
+b;
+**false**
+
+If you use the logical NOT twice, you get the original value:
+
+var b = !!true;
+b;
+**true**
+
+If you use a logical operator on a non-Boolean value, the value is converted to Boolean behind the scenes:
+
+var b = "one";
+!b;
+**false**
+
+You can convert any value to its Boolean equivalent using a double negation. Understanding how any value converts to a Boolean is important. Most values convert to *true* with the exception of the following, which convert to *false*:
+
+* The empty string  ""
+* *null*
+* *undefined*
+* The number 0
+* The number *NaN*
+* The Boolean *false*
+
+These sis values are referred to as falsy, while all others are truthy(including, for example, the strings "0", " ", and "false").
+
+Let's see some examples of the other two operators - the logical AND(&&) and the logical OR(||). When you use &&, the result is *true* only if all of the operands are *true*. When you use ||, the result is *true* if at least on of the operands is *true*:
+
+var b1 = true, b2 = false;
+b1 || b2;
+**true**
+
+b1 && b2;
+**false**
+
+Here's a list of the possible operations and their results:
+
+| Operation      | Result |
+|----------------|--------|
+| true && true   | true   |
+| true && false  | false  |
+| false && true  | false  |
+| false && false | false  |
+| true || true   | true   |
+| true || false  | true   |
+| false || true  | true   |
+| false || false | false  |
+
+You can use several logical operations one after the other:
+
+true && true && false && true;
+**false**
+
+
 
