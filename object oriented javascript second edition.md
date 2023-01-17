@@ -235,3 +235,24 @@ Infinity / 2;
 Infinity - 99999999999999999;
 **Infinity**
 
+#### NaN
+
+It turns out that despite its name, "Not a Number", *NaN* is a special value that is aldo a number:
+
+typeof NaN
+**"number"**
+
+var a = NaN
+a;
+**NaN**
+
+Your get *NaN* when you try to perform an operation that assumes numbers, but the operation fails. For example, if you try to multiply 10 by the character "f", the result is NaN, because "f" is obviously not a valid operand for a multiplication:
+
+var a = 10 * "f";
+a;
+**NaN**
+
+*NaN* is contagious, so if you have even one *NaN* in your arithmetic operation, the whole result goes down the drain:
+
+1 + 2 + NaN;
+**NaN**
