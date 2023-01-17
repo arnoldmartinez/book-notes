@@ -256,3 +256,13 @@ a;
 
 1 + 2 + NaN;
 **NaN**
+
+#### Strings
+
+In JavaScript, any value placed between single or double quotes is considered a string. This means that 1 is a number, but "1" is a string. When used with strings, *typeof* returns the string "string"
+
+var s = "some characters";
+typeof s;
+**"string"**
+
+
