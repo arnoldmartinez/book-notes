@@ -303,5 +303,19 @@ n = "" + n;
 typeof n;
 **"string"**
 
+#### Special strings
 
+There are also strings with special meanings, as listed in the following table:
+
+| String | Meaning                         | Example                       |
+|--------|-------------------------------- |-------------------------------|
+| \\     | \ is the scape character.       | var s = "1\\2;                |
+| \'     | Simple quotes inside the string | var s = 'I don\'t know';      |
+| \"     | Quotes inside the string        | var s = "\"Hello\", he said." |
+| \n     | End of line                     | var s = '\n1\n2;              |
+| \r     | Carriage return                 | var = '1\r2';                 |
+| \t     | Tab                             | var s = "1\t2;"               |
+| \u     | \u allows you to use Unicode    | "\u421"                       |
+
+There are also additional characters that are rarely used: \b (backspace), \v (vertical tabl), and \f (form feed).
 
