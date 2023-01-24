@@ -388,15 +388,36 @@ Here's a list of the possible operations and their results:
 | true && false  | false  |
 | false && true  | false  |
 | false && false | false  |
-| true || true   | true   |
-| true || false  | true   |
-| false || true  | true   |
-| false || false | false  |
+| true OR true   | true   |
+| true OR false  | true   |
+| false OR true  | true   |
+| false OR false | false  |
 
 You can use several logical operations one after the other:
 
 true && true && false && true;
 **false**
 
+#### Operator precedence
 
+As you know from mathematics:
 
+1 + 2 * 3;
+
+**7**
+
+This is because multiplication has higher precedence over addition, so 2 * 3 is evaluated first, as if you typed:
+
+1 + (2 * 3);
+
+**7**
+
+Similarly for logical operations, *!* has the highest precedence and is executed first, assuming there are no parentheses that demand otherwise. Then, in the order of precedence, comes && and finaly ||. 
+
+false && false || true && true
+
+**true**
+
+(false && false) || (true && true)
+
+**true**
