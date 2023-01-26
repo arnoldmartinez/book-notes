@@ -33,9 +33,34 @@ Directory temp, in ~/.config/nvim/
 
 > vim
 
+Create alias
+
+> alias vim="nvim"
+
 Inside the file 
 
 > :set backuskip
+
+Horizontal split
+
+> :split or :sp
+
+Vertical split 
+
+> :vsplit or :vs
+
+Edit another file
+
+> :e [file]
+
+Edit new file and write their name file
+
+> :enew \
+> :w [file]
+
+Another way of the step avobe
+
+> :e [name new file] 
 
 Move to the last of the words on read mode
 
@@ -72,6 +97,17 @@ Remove the space where is located
 Select words
 
 > ve
+
+Select the line
+
+> ˆv
+
+Select multiple lines and put text
+
+> ctrl v \
+> select lines to down or up \
+> Put the text \
+> Press esc
 
 Copy
 
