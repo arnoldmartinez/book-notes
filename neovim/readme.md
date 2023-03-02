@@ -129,3 +129,7 @@ Install neovim packer
 Go to the '~/.config/nvim/lua/plugins.lua' on read mode and install the plugins
 
 > :PackerInstall
+
+Install Tree-sitter
+
+> brew install tree-sitter
