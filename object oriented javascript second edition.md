@@ -421,3 +421,29 @@ false && false || true && true
 (false && false) || (true && true)
 
 **true**
+
+#### Lazy evaluation
+
+If you have several logical operations one after the other, but the result becomes clear at some point before the end, the final operations will not be performed because they don't affect the end result. Consider this:
+
+> true || false || true || false || true;
+
+**true**
+
+
+Since these are all OR operations and have the same precedence, the result will be **true** if at least one of the operands is **true**. JavaScript engine decides to be lazy (efficient) and avoids unnecessary work by evaluating code that doesn't affect the end result.
+
+If JavaScript encounters a non-Boolean expression as an operand in a logical operation, the non-Boolean is returned as a result:
+
+> true || "something";
+
+**true**
+
+> true && "something";
+
+**"shomething"**
+
+
+> true && "something" && true;
+
+**true**
