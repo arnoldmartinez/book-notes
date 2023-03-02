@@ -447,3 +447,29 @@ If JavaScript encounters a non-Boolean expression as an operand in a logical ope
 > true && "something" && true;
 
 **true**
+
+#### Comparison
+
+There's another set of operator that all return a Boolean value as a result of the operation. These are the comparison operators. The following table lists them together with example uses:
+
+| Operator symbol | Result                                                                | Example                |
+|-----------------|-----------------------------------------------------------------------|------------------------|
+| ==              | Equality comparison: Return true when both operands are equal. The operands are converted to the same type before being compared. Also called loose comparison                                                                   | > 1 == 1; **true**     |
+| ===             | Equality and type comparison: Return **true** if both operands are equal and of the same type. It's better and safer to compare this way because there's no behind-the-scenes type conversions. It is called stric comparison. | > 1 === '1'; **false** |
+| !=              | Non-equality comparison: Return **true** if the operands are not equal to each other (after a type conversion).
+                                                                                          | > 1 != 1; **false**    |
+| !==             | Non-equality comparison without type conversion: Returns **true** if the operands are not equals or if they are of different types.
+                                                                                          | > 1 !== 1; **false**   |
+| >               | Return **true** if the left operand is greater than the right one.    | > 1 > 1; **false**     |
+| >=              | Returns **true** if the left operand is greater than or equal to the right one.    
+                                                                                          | > 1 >= 1; **true**     |
+| <               | Return **true** if the left operand is less than the right one.       | > 1 < 1; **false**     |
+| <=              | Return **true** if the left operand is less than or equal to the right one.       
+                                                                                          | > 1 <= 1; **true**     |
+                                                                                          
+Note that **NaN** is not equal to anything, not even itself:
+
+> NaN == NaN;
+
+**false**
+
