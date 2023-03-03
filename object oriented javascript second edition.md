@@ -584,3 +584,39 @@ To access an array element, you specify the index of that element inside square 
 > a[0]
 
 **1**
+
+#### Adding/updating array elements
+
+Using the index, you can also update the values of the elements of the array.
+
+> a[2] = 'three';
+
+**"three"**
+
+> a;
+
+**[1,2,"three"]**
+
+You can add more elements by addressing and index that didn't exist before:
+
+> a[3] = 'four';
+
+**"four"**
+
+> a;
+
+**[1,2,"three","four"]**
+
+if you add a new element, but leave a gap in the array, those elements in between don't exist and return the *undefined* value if accessed.
+
+> var a = [1, 2, 3];
+
+> a[6] = 'new';
+
+**"new"**
+
+> a;
+
+**[1,2,3,undefined,undefined,undefined, "new"]**
+
+
