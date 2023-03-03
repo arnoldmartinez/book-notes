@@ -469,3 +469,88 @@ Note that **NaN** is not equal to anything, not even itself:
 
 **false**
 
+#### Undefined and null
+
+If you try to use a non-existng variable, you'll get an error:
+
+> foo;
+ 
+ **ReferenceError: foo is not defined**
+ 
+Using the typeof operator on a non-existing variable is not an error. You get the string "undefined" back:
+
+> typeof foo;
+
+**"undefined"**
+
+If you declare a variable without giving it a value, this is, of course, not an error. But the typeof still returns "undefined":
+
+> var somevar;
+> somevar;
+> typeof somevar;
+
+**"undefined"**
+
+This is because when you declare a variable without initializing it, JavaScript automatically intializes it with the value **undefined**:
+
+> var somevar;
+> somevar === undefined;
+
+**true**
+
+The *null* value, on the other hand, is not assigned by JavaScript behind the scenes;
+it's assigned by your code:
+
+> var somevar = null;
+
+**null**
+
+> typeof somevar;
+
+**"object"**
+
+Although the difference between *null* and *undefined* is small, it could be critical at times. For example, if you attempt an arithmetic operation, you get different results:
+
+> var i = 1 + undefined;
+> i;
+
+**NaN**
+
+> var i = 1 + null;
+> i;
+
+**1**
+
+This is because of the different ways *null* and *undefined* are converted to the other primitive types.
+
+- Conversion to a number:
+
+> 1 * undefined;
+
+**NaN**
+
+> 1 * null;
+
+**0**
+
+- Conversion to a Boolean:
+
+> !!undefined;
+
+**false**
+
+> !!null;
+
+**false**
+
+- Conversion to a string:
+
+> "value: " + null;
+
+**"value: null"**
+
+> "value: " + undefined;
+
+**value: undefined"
+
+
