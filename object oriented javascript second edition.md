@@ -619,4 +619,20 @@ if you add a new element, but leave a gap in the array, those elements in betwee
 
 **[1,2,3,undefined,undefined,undefined, "new"]**
 
+#### Deleting elements
 
+To delete an element, you use the *delete* operator. However, after the deletion, the lenght of the array does not change. in a sense, you get a hole in the array:
+
+> var a = [1,2,3];
+
+> delete a[1];
+
+**true**
+
+> a;
+
+**[1, undefined, 3]**
+
+> typeof a[1];
+
+**"undefined"**
