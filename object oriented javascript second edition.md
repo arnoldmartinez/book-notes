@@ -553,4 +553,34 @@ This is because of the different ways *null* and *undefined* are converted to th
 
 **"value: undefined"**
 
+Arrays
 
+So, what is an array? It's simply a list (a sequence) of values. Instead of using one variable to store one value, you can use one array variable to store any number of values as elements of the array.
+
+To declare a variable that contains an empty array, you use square brackets with nothing between them:
+
+> var a = [];
+
+To define an array that has three elements, you do this:
+
+> var a = [1, 2, 3];
+
+When you simply type the name of the array in the console, you get the contents of you array:
+
+> a;
+
+**[1,2,3]**
+
+The elements contained in an array are indexed with consecutive numbers starting from zero. Here's the three-element array from the previous example:
+
+| Index      | Value  |
+|------------|--------|
+| 0          | 1      |
+| 1          | 2      |
+| 2          | 3      |
+
+To access an array element, you specify the index of that element inside square brackets. So, *a[0]* gives you the first element of the array, and so on.
+
+> a[0]
+
+**1**
