@@ -553,7 +553,7 @@ This is because of the different ways *null* and *undefined* are converted to th
 
 **"value: undefined"**
 
-Arrays
+#### Arrays
 
 So, what is an array? It's simply a list (a sequence) of values. Instead of using one variable to store one value, you can use one array variable to store any number of values as elements of the array.
 
