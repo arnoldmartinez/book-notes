@@ -636,3 +636,53 @@ To delete an element, you use the *delete* operator. However, after the deletion
 > typeof a[1];
 
 **"undefined"**
+
+#### Arrays of arrays
+
+Arrays can contain all types of values, including other arrays:
+
+> var a = [1, "two", false, null, undefined];
+
+> a;
+
+** [1, "two", false, null, undefined]
+
+> a[5] = [1, 2, 3];
+
+**[1,2,3]**
+
+> a;
+
+**[1,"two",false,null,undefined,Array[3]]**
+
+The **Array[3]** in the result is clickable in the console and it expands the array values. Let's see an example where you have an array of two elements, both of them being other arrays:
+
+> var a = [[1, 2, 3], [4, 5, 6]];
+
+**[Array[3], Array[3]]**
+
+To access an element in the nested array, you refer to the element index in another set of square brackets:
+
+> a[0][0];
+
+**1**
+
+> a[1][2];
+
+**6**
+
+Note that you can use the array notation to access individual characters inside a string:
+
+> var s = 'one';
+
+> s[0];
+
+**"o"**
+
+> s[1];
+
+**"n"**
+
+> s[2];
+
+**"e"**
