@@ -698,11 +698,10 @@ Note that you can use the array notation to access individual characters inside 
 
 #### The if condition
 
-> var result = '', a = 3;
-
-> if (a > 2) {
->     result = 'a is greater than 2';
-> }
+>     var result = '', a = 3;
+>     if (a > 2) {
+>         result = 'a is greater than 2';
+>     }
 
 The parts of the *if* condition are:
 
