@@ -551,6 +551,6 @@ This is because of the different ways *null* and *undefined* are converted to th
 
 > "value: " + undefined;
 
-**value: undefined"
+**"value: undefined"**
 
 
