@@ -686,3 +686,12 @@ Note that you can use the array notation to access individual characters inside 
 > s[2];
 
 **"e"**
+
+#### Conditions and loops
+
+**Conditions** provide a simple but powerful way to control the flow of code execution.
+**Loops** allos you to perform repetitive operations with less code.
+
+- *if* conditions
+- *switch* statements
+- *while*, *do-while*, *for*, and *for-in* loops 
