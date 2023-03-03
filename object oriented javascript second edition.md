@@ -748,3 +748,22 @@ You can also nest conditions by putting new conditions within any of the blocks:
 >         result = 'a is not 1, no idea about b';
 >     }
     
+
+#### Alternative if syntax
+
+When you have a simple condition, you can consider using an alternative *if* syntax. Take a look at this:
+
+>     var a = 1;
+>     var result = '';
+>     if (a === 1) {
+>         result = "a is one";
+>     } else {
+>         result = "a is not one";
+>     }
+
+You can also write this as:
+
+>     var a = 1;
+>     var result = (a === 1) ? "a is one" : "a is not one";
+
+You should only use this syntax for simple conditions. Be careful not to abuse it, as it can easily make you code unreadable.
