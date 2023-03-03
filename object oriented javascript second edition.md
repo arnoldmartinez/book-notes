@@ -695,3 +695,25 @@ Note that you can use the array notation to access individual characters inside 
 - *if* conditions
 - *switch* statements
 - *while*, *do-while*, *for*, and *for-in* loops 
+
+#### The if condition
+
+> var result = '', a = 3;
+
+> if (a > 2) {
+>     result = 'a is greater than 2';
+> }
+
+The parts of the *if* condition are:
+
+- The *if* statement
+- A condition in parentheses - "is *a* greater than 2?"
+- A block of code wrapped in {} that executes if the condition is satisfied
+
+The condition (the part in parentheses) always returns a Boolean value, and may also contain the following:
+
+- A logical operation: !, &&, or ||
+- A comparison, such as ===, !=, >, and so on
+- Any value or variable that can be converted to a Boolean
+- A combination of the above
+
