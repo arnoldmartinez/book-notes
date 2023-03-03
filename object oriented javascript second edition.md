@@ -716,3 +716,35 @@ The condition (the part in parentheses) always returns a Boolean value, and may 
 - Any value or variable that can be converted to a Boolean
 - A combination of the above
 
+#### The else clause
+
+There can also be an optional *else* part of the *if* condition. The *else* statement is followed by a block of code that runs if the condition evaluates to *false*:
+
+>     if (a > 2) {
+>         result = 'a is greater thatn 2';
+>     } else {
+>         result = 'a is NOT greater than 2;
+>     }
+
+In between the *if* and the *else*, there can also be an unlimited number of *else* if conditions. Here's an example:
+
+>     if (a > 2 || a < -2) {
+>         result = 'a is not between -2 and 2';
+>     } else if (a === 0 && b === 0) {
+>         result = 'both a and b are zeros';
+>     } else {
+>         result = 'I give up';
+>     }
+
+You can also nest conditions by putting new conditions within any of the blocks:
+
+>     if (a === 1) {
+>         if (b === 2) {
+>             result = 'a is 1 and b is 2';
+>         } else {
+>             result = 'a is 1 but b is definitely not 2';
+>         }
+>     } else {
+>         result = 'a is not 1, no idea about b';
+>     }
+    
