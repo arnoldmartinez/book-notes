@@ -767,3 +767,4 @@ You can also write this as:
 >     var result = (a === 1) ? "a is one" : "a is not one";
 
 You should only use this syntax for simple conditions. Be careful not to abuse it, as it can easily make you code unreadable.
+
