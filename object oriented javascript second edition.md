@@ -768,3 +768,37 @@ You can also write this as:
 
 You should only use this syntax for simple conditions. Be careful not to abuse it, as it can easily make you code unreadable.
 
+#### Switch
+
+If you find you yourself using an *if* condition and having too many *else if* parts,  you could consider changing the *if* to a *switch*:
+
+>     a = '1';
+>     result = '';
+>     switch (a) {
+>         case 1:
+>             result = 'Number 1';
+>             break;
+>         case '1':
+>             result = "String 1';
+>             break;
+>         default:
+>             result = "I don\'t know';
+>             break;
+>     }
+
+The result after executing this is "String 1". Let's see what the parts of a switch are:
+
+* The *switch* statement.
+* An expresion in parentheses. The expression most often contains a variable, but can be anything that returns a value.
+* A number of *case* blocks enclosed in curly brackets.
+* Each case statement is followed by an expression. The result of the expression is compared to the expression found after the *switch* statement. If the result of the comparison is *true*, the code that follows the colon after the case is executed.
+* There is an optional *break* statement to signal the end of the *case* block. If this *break* statement is reached, the *switch is all done. Otherwise, if the *break* is missing, the program execution enters the next *case* block.
+* There's an optional default case marked with the *default* statement and followed by a block of code. The default case is executed if non of the previous cases evaluated to *true*.
+
+
+##### Best practice tips
+
+* Indent the code that follows the *case* lines. You can also indent *case* from the *switch*, but that doesn't give you much in terms of readability.
+* Don't forget to *break*.
+* Sometimes, you may want to omit the *break* intentionall, but that's rare. It's called a fall-through and should always be documented because it may look like an accidental omission. on the other hand, sometimes you may want to omit the whole code block following a *case* and have two cases sharing the same code. This is fine, but doesn't change the rule that if there's code that follows a *case* statement, this code should end with a *break*. In terms of indentation, aligning the *break* with the *case* or with the code inside the case is personal preference; again, being consistent is what matters.
+* Use the *default* case. This helps you make sure you always have a meaningful result after the *switch* statement, even if none of the cases matches the value being switched.
