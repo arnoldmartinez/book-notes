@@ -802,3 +802,14 @@ The result after executing this is "String 1". Let's see what the parts of a swi
 * Don't forget to *break*.
 * Sometimes, you may want to omit the *break* intentionall, but that's rare. It's called a fall-through and should always be documented because it may look like an accidental omission. on the other hand, sometimes you may want to omit the whole code block following a *case* and have two cases sharing the same code. This is fine, but doesn't change the rule that if there's code that follows a *case* statement, this code should end with a *break*. In terms of indentation, aligning the *break* with the *case* or with the code inside the case is personal preference; again, being consistent is what matters.
 * Use the *default* case. This helps you make sure you always have a meaningful result after the *switch* statement, even if none of the cases matches the value being switched.
+
+#### Loops
+
+In JavaScript, there are four types of loops:
+
+* *while* loops
+* *do-while* loops
+* *for* loops
+* *for-in* loops
+
+
