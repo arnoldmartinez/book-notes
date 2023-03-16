@@ -812,4 +812,13 @@ In JavaScript, there are four types of loops:
 * *for* loops
 * *for-in* loops
 
+#### While loops
 
+*while* loops are the simplest type of iteration.
+
+>     var i = 0;
+>     while (i < 10) {
+>         i++;
+>     }
+
+The *while* statement is followed by a condition in parentheses and a code block in curly brackets. As long as the condition evaluates to *true*, the code block is executed over and over again.
