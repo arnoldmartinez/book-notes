@@ -822,3 +822,4 @@ In JavaScript, there are four types of loops:
 >     }
 
 The *while* statement is followed by a condition in parentheses and a code block in curly brackets. As long as the condition evaluates to *true*, the code block is executed over and over again.
+
