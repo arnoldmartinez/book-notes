@@ -673,19 +673,16 @@ To access an element in the nested array, you refer to the element index in anot
 
 Note that you can use the array notation to access individual characters inside a string:
 
-> var s = 'one';
+>     var s = 'one';
+>     s[0];
+>     **"o"**
 
-> s[0];
+>     s[1];
+>     **"n"**
 
-**"o"**
+>     s[2];
 
-> s[1];
-
-**"n"**
-
-> s[2];
-
-**"e"**
+>     **"e"**
 
 #### Conditions and loops
 
