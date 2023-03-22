@@ -682,7 +682,7 @@ Note that you can use the array notation to access individual characters inside 
 
 >     s[2];
 
->     **"e"**
+>     e
 
 #### Conditions and loops
 
