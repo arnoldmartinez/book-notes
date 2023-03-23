@@ -667,9 +667,9 @@ To access an element in the nested array, you refer to the element index in anot
 
 **1**
 
-> a[1][2];
+>     a[1][2];
 
-**6**
+>     6
 
 Note that you can use the array notation to access individual characters inside a string:
 
