@@ -145,3 +145,12 @@ When working with Vim configuration, you can try things out before adding them t
 
 Vim 8 comes prepackaged with the following color themes: blue, darkblue, default, delek, desert, elflord, evening, industry, koehler, morning, murphy, pablo, peachpuff, ron, shine, slate, torte, zellner. You can try out a color theme by typing :colorscheme <name>. 
 
+## Common operations(or how to exit Vim)
+
+### Opening files
+
+#### TIP
+
+If you're using gVim--you can open a file by going into a **File** menu and choosing **Open**. Sometimes graphical interface is exactly what you need!
+
+
