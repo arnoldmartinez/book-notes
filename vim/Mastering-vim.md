@@ -5,11 +5,8 @@
 Linux machines com with Vim installed. Vim 8 introduces some much-needed optimizations, run the following code:
 
 >     git clone https://github.com/vim/vim.git
-
 >     cd vim/src
-
 >     make
-
 >     sudo make install
 
 #### TIP
