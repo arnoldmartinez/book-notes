@@ -99,13 +99,9 @@ If your Vim is compiled with Python 2 support(+python) instead of Python 3 suppo
 If we wanted to recompile Vim 8.1 with Python 3 support on Linux, we would do the following:
 
 >     git clone https://github.com/vim/vim.git
-
 >     cd vim/src
-
 >     ./configure --with-features=huge --enable-python3interp
-
 >     make
-
 >     sudo make install
 
 
