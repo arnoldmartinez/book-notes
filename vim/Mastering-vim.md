@@ -142,8 +142,60 @@ Vim 8 comes prepackaged with the following color themes: blue, darkblue, default
 
 ### Opening files
 
+For simplicity's sake, let's make a simple square root calculator. Run the following command:
+
+>     vim animal_farm.py
+
+This open a file named *animal_farm.py*. If the file existed. you'd see its contents, but since it doesn't, we're greeted by an empty screen.
+
+You can tell that the file doesn't exist by the *[New File]* text next to a file name in the status line at the bottom of the screem.
+
 #### TIP
 
 If you're using gVim--you can open a file by going into a **File** menu and choosing **Open**. Sometimes graphical interface is exactly what you need!
+
+#### TIP
+
+Vim's status line often contains a lot of useful information. That's the primary way for Vim to communicate with a user, so do keep an eye out for messages in the status line!
+
+If you already have Vim open-- you can load a file by typing the following, and hitting Enter:
+
+>     :e animal_farm.py
+
+Pressing colon character : enters a command-line mode, which lets you enter a line of text which Vim will interpret as a command. Commands are terminated by hitting the *Enter* key, which allows you to perform various complex operations. Command *:e* stands for *edit*
+
+#### TIP
+Vim help often refers to the *Enter* key as a <CR>, which stands for carriage return.
+
+## Changin text
+
+Hit *i* on your keyboard to enter an insert mode. This will display **-- INSERT --** in a status line (at the bottom).
+
+#### TIP
+
+Three of Vim's modes: command-line mode, normal mode, and insert mode.
+
+Let's create our Python application by typing the following code.
+
+>     #!/usr/bin/python3
+>     """Our own little animal farm."""
+>     import sys
+>     def add_animal(farm, animal):
+>       farm.add(animal):
+>       return farm
+>
+>     def main(animals):
+>       farm = set()
+>       for animal in animals:
+>         farm = add_animal(farm, animal)
+>       print("We've got some animals on the farm", ', '.join(farm) + '.')
+>
+>     if __name__ == '__main__':
+>       if len(sys.argv) == 1:
+>         print('Pass at least one animal type!)
+>         sys.exit(1)
+>       main(sys.argv[1:])
+
+To get back to normal mode in Vim, hit *Esc* on your keyboard. You'll see that ** -- INSERT --** has disappeared from the status line. Now, Vim is ready to take commands from you!
 
 
