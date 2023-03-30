@@ -196,6 +196,38 @@ Let's create our Python application by typing the following code.
 >         sys.exit(1)
 >       main(sys.argv[1:])
 
-To get back to normal mode in Vim, hit *Esc* on your keyboard. You'll see that ** -- INSERT --** has disappeared from the status line. Now, Vim is ready to take commands from you!
+To get back to normal mode in Vim, hit *Esc* on your keyboard. You'll see that *-- INSERT --* has disappeared from the status line. Now, Vim is ready to take commands from you!
+
+## Saving and closing files
+
+To save a file execute the following command:
+
+>     :w
+
+:w stands for *write*
+
+#### TIP
+
+The write command can also be followed by a filename, making it possible to write to a different file, other than the one that is open(:w animal_farm_2.py). To change the current open file to a new one when saving, use *:saveas* command *:saveas animal_farm_2.py*
+
+Let's exit Vim and check if the file was indeed created *:q* stands for *quit*. You can also combine write and quit commands to write and exit by executing :wq.
+
+>     :q
+
+If you mae changes to a file and want to exit Vim without saving the changes, you'll have to use :q! to fore Vim to quit. Exclamation mark at the end of the command forces its execution.
+
+#### TIP
+
+Many commands in Vim have shorter and longer versions. For instance, :e, :w, and :q are short versions of :edit, :write, and :quit. In the Vim manual, the optional part of the command is often annotated in square brackets([]). For example, :w[rite] or :e[dit].
+
+Let's check the contents of a current directory.
+
+>     ls
+>     python3 animal_farm.py
+>     python3 animal_farm.py cat dog sheep
+
+#### TIP
+
+In Unix, *ls* lists contents of a current directory.*python3 animal_farm.py* executes the script using a Python 3 interpreter, and *python3 animal_farm.py cat dog sheep* passes three arguments(cat, dog, sheep) to our script.
 
 
