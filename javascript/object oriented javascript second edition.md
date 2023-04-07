@@ -97,7 +97,7 @@ CASE_MATTERS;
 
 Operators take one or two values (or variables), perform an operation, and return a value.
 
-> 1 + 2;
+>     1 + 2;
 **3**
 
 In the code:
