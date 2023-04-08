@@ -63,10 +63,10 @@ Using a variable requires two steps. You need to:
 
 To declare a variable, you use the *var* statement, like this:
 
-var a;
-var thisIsAVariable;
-var _and_this_too;
-var mix12three;
+>     var a;
+>     var thisIsAVariable;
+>     var _and_this_too;
+>     var mix12three;
 
 For the names of the variables, you can use any combination of letters, numbers, the underscore character, and the dollar sign. However, you can't start with a number, which means that this is invalid:
 
