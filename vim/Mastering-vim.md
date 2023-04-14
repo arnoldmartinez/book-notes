@@ -249,3 +249,55 @@ By default, Vim creates files like *<filename>.swp* and *.<filename>.swp* in the
 If you're on Windows, you should use *set directory=%USERDATA%\.vim\swap//(note the directions of the las two slashes).
 
 You can also choose to disable the swap files completely by adding *set noswapfile* to your *.vimrc*.
+
+## Moving around: talk to your editor
+
+You can move your cursor around character by characte by using arrow keys or letter *h*, *j*, *k*, and *l*.
+
+|Key|Alternative key|     Action      |
+|---|---------------|-----------------|
+| h |Left arrow     |Move cursor left |
+| j |Down arrow     |Move cursor down |
+| k |Up arrow       |Move cursor up   |
+| l |Right arrow    |Move cursor right|
+
+Calculating the exact number of characters you would like to move is pretty hard, so there's a way to move by words. Use *w* to move to the beginning of the next **word**, and use *e* to get to the **end** of the closset word. To move **backwards** to the beginning of the word, hit *b*.
+
+#### TIP
+
+Vim has two kinds of word objects: referred to as lowercase **"word"** and uppercase **"WORD"**. In Vim world, word is a sequence of letters, digits, and underscores separated by white space. WORD is a sequence of any non-blank charaters separated by white space.
+
+Let's take the following line of code form our example:
+
+![alt text](img/ch1-02.png)
+
+#### TIP
+
+Notice the cursor position, it's hovering over the first character of *add_animal*.
+
+Hitting *w* will move the cursor to beginning of the word *add_animal*, while hitting *W* will take you to the beginning of *animal*. Capitalized W, E, and B will treat any characters bundled together and seprated by a space as their own words. 
+
+|Key|Action                                     |
+| w |Move forward by word                       |
+| e |Move forward until the end of the word     |
+| W |Move forward by WORD                       |
+| E |Move forward until the end of the WORD     |
+| b |Move backwards to the beginning of the word|
+| B |Move backwards to the beginning of the WORD|
+
+The following screenshot shows more examples of how each command behaves:
+
+![alt text](img/ch1-03.png)
+
+It's also really useful to move in paragraphs. Everything separated by at least two new lines is considered a paragraph, which also means each code block is a paragraph, as can be seen in the following example:
+
+![alt text](img/ch1-04.png)
+
+The functions *add_animal* and *main* are two separate paragraphs. Use a closing curly brace *}* to move forward, and an opening curly brace *{* to move backwards.
+
+|Command|Action                       |
+|{      |Move back by one paragraph   |
+|}      |Move forward by one paragraph|
+
+Don't forget to combine these two with numbers if you need to move by more than one paragraph.
+
