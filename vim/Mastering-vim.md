@@ -230,4 +230,22 @@ Let's check the contents of a current directory.
 
 In Unix, *ls* lists contents of a current directory.*python3 animal_farm.py* executes the script using a Python 3 interpreter, and *python3 animal_farm.py cat dog sheep* passes three arguments(cat, dog, sheep) to our script.
 
+The following screenshot shows what the three preceding commands should output:
 
+![alt text](img/ch1-01.png)
+
+## A word about swap files
+
+By default, Vim keeps track of the changes you make to files in swap files. The swap files are created as you edit the files, and are used to recover the contents of your files in case either Vim, your SSH session, or you machine crashes.
+
+You can either hit *r* to recover the swap file contents, or *d* to delete the swap file and dismiss the changes. If you decide to recover the swap file, you can prevent the same message from showing up next time you open the file in Vim by reopening a file and running *:e*, and pressing *d* to delete the swap file.
+
+By default, Vim creates files like *<filename>.swp* and *.<filename>.swp* in the same directory as the original file. You can change this behavior by telling Vim to place all the swap files in a single directory. To do so, add the following to your *.vimrc*:
+
+>     set directory=$HOME/.vim/swap//
+
+#### TIP
+
+If you're on Windows, you should use *set directory=%USERDATA%\.vim\swap//(note the directions of the las two slashes).
+
+You can also choose to disable the swap files completely by adding *set noswapfile* to your *.vimrc*.
