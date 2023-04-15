@@ -278,6 +278,7 @@ Notice the cursor position, it's hovering over the first character of *add_anima
 Hitting *w* will move the cursor to beginning of the word *add_animal*, while hitting *W* will take you to the beginning of *animal*. Capitalized W, E, and B will treat any characters bundled together and seprated by a space as their own words. 
 
 |Key|Action                                     |
+|---|-------------------------------------------|
 | w |Move forward by word                       |
 | e |Move forward until the end of the word     |
 | W |Move forward by WORD                       |
@@ -300,4 +301,55 @@ The functions *add_animal* and *main* are two separate paragraphs. Use a closing
 |}      |Move forward by one paragraph|
 
 Don't forget to combine these two with numbers if you need to move by more than one paragraph.
+
+## Making simple edits in insert mode
+
+Often times you will want to change some piece of text for another one, and there´s a command just for that *c*. The *change* command allows you to remove a portion of text and immediately enter an insert mode. *Change* is a compound command, meaning that it needs to be followed by a command which tells Vim what needs to be changed. You can combine it with any of the movement commands.
+
+![alt text](img/ch1-05.png)
+
+#### TIP
+
+As an odd exception, *cw* behaves like *ce*. This is a leftover from Vi, Vim's predecessor.
+
+#### TIP
+
+>     All of these examples follow the  <command> <number> <movement or a text object> structure. You can put a number before or after the *<command>*.
+
+
+For example, if you wish to change *farm = add_animal(farm, animal)* to *farm =  add_animal(farm, creature)*, you can execute the following set of commands:
+
+![alt text](img/ch1-06.png)
+
+Sometimes we just want to cut things, without putting anything instead, and *d* does just that. It stands for delete. It behaves similarly to *c*, except that the behavior of *w* and *e* is more standard.
+
+![alt text](img/ch1-07.png)
+
+There are also two more nifty shortcuts which allow you to change or delete a whole line
+
+|Command|What it does|
+|-------|------------|
+|cc     |Clears the whole line and enters insert mode. Preserves current indentation level, which is useful when coding.|
+|dd     |Deletes an entire line.|
+
+>     def main(animals):
+>     farm = set()
+>     for animal in animals:
+>         farm = add_animal(farm, animal)
+>     print("We've got some animals on the farm:", ', '.join(farm) + '.')
+
+By hitting *dd* you will completely remove a line, as demonstrated in the following example:
+
+>     def main(animals):
+>     farm = set()
+>     for animal in animals:
+>     print("We've got some animals on the farm:", ', '.join(farm) + '.')
+
+Hitting *cc* will clear the line and enter insert mode with the proper indent, as shown in the following example:
+
+![alt text](img/ch1-08.png)
+
+#### TIP
+
+If you run into difficulties picking the right movement commands, you can also use the visual mode to select text you want to modify. Hit *v* to enter the visual mode and use the usual movement commands to adjust the selection. Run the desired command(like *c* to change or *d* to delete) once you're satisfied with the selection.
 
