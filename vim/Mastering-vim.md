@@ -347,7 +347,7 @@ By hitting *dd* you will completely remove a line, as demonstrated in the follow
 
 Hitting *cc* will clear the line and enter insert mode with the proper indent, as shown in the following example:
 
-![alt text](img/ch1-08.png)
+![img08](img/ch1-08.png)
 
 #### TIP
 
