@@ -347,7 +347,7 @@ By hitting *dd* you will completely remove a line, as demonstrated in the follow
 
 Hitting *cc* will clear the line and enter insert mode with the proper indent, as shown in the following example:
 
-![img08](img/ch1-08.png)
+![image 08](img/ch1-08.png)
 
 #### TIP
 
@@ -375,4 +375,37 @@ However, this will litter your system with an undo file for each file you're edi
 #### TIP
 
 If you're using Windows, replace the directories with %USERPROFILE%\vimfiles\undodir(and you'll be making changes to *_vimrc* instead of *.vimrc*).
+
+## Read the Vim manual using :help
+
+Vim can offer certainly a *:help* command, as can be seen in the following screenshot:
+
+![image 09](img/ch1-09.png)
+
+Scroll through using the *Page Up* and *Page Down* keys(bonus point for using *Ctrl + b* and *Ctrl + f* respectively).
+
+Whenever you are stuck, or want to learn more about a particular command, try searching it using *:help*(you can shorten it to *:h*). Let's try searching for a *cc* command we've learned:
+
+>     :h cc
+
+![image 10](img/ch1-10.png)
+
+*:help* is a command which navigates a set of help files. You'll notice that certain words are highlighted in color. These are tags, and can be searched for using the *:help* command. If we wanted to learn how to search for a string in Vim, we could try using the following:
+
+>     :h search
+
+However, it looks like this command takes us to the entry on expression evaluation, which is not exactly what we were looking for.
+
+![image 11](img/ch1-11.png)
+
+To find the right entry in *:h search* followed by *Ctrl + d*. This will give you a list of help tags containing the substring *search*. One of the options show in *search-commands* which is what we'd be looking for. Complete your command in the following way to get to the entry we were looking for:
+
+>     :h search-commands
+
+![image 12](img/ch1-12.png)
+
+#### TIP
+
+You can search inside help pages using */search term* to search forward from the cursor or *?search term* to search backward.
+
 
