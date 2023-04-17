@@ -353,3 +353,26 @@ Hitting *cc* will clear the line and enter insert mode with the proper indent, a
 
 If you run into difficulties picking the right movement commands, you can also use the visual mode to select text you want to modify. Hit *v* to enter the visual mode and use the usual movement commands to adjust the selection. Run the desired command(like *c* to change or *d* to delete) once you're satisfied with the selection.
 
+## Persistent undo and repeat
+
+Press *u* to undo a last operation, and *Ctrl + r* to redo it.
+
+Vim also allows you to persist undo history between sessions, which is great if you want to undo(or remember) something you've done a few days ago!
+
+You can enable persistent undo by adding the following line to your .vimrc:
+
+>     set undofile
+
+However, this will litter your system with an undo file for each file you're editing. You can consolidate the undo files in a single directory, as seen in the following example:
+
+>     " Set up persistent undo across all files.
+>     set undofile
+>     if !isdirectory(expand("$HOME/.vim/undodir"))
+>         call mkdir(expand("$HOME/.vim/undodir"), "p")
+>     endif
+>     set undodir=$HOME/.vim/undodir
+
+#### TIP
+
+If you're using Windows, replace the directories with %USERPROFILE%\vimfiles\undodir(and you'll be making changes to *_vimrc* instead of *.vimrc*).
+
