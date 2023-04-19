@@ -10,7 +10,7 @@
 
 The different phases of developing, deploying, and finally using and algorithm are illustrated in the following diagram:
 
-![Alt text](../40-algorithms-every-programmer-should-know/images/Chapter01-1.png "Phase of an algorithm")
+![image 01](../40-algorithms-every-programmer-should-know/images/Chapter01-1.png "Phase of an algorithm")
 
 As we can see, the process start with understanding the requirements from a problem statement that detail what needs to be done. Once the problem is clearly stated, it leads us to the development phase.
 
