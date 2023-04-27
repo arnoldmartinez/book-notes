@@ -408,4 +408,42 @@ To find the right entry in *:h search* followed by *Ctrl + d*. This will give yo
 
 You can search inside help pages using */search term* to search forward from the cursor or *?search term* to search backward.
 
+# Chapter 2
+
+The following topics will be covered in this chapter:
+
+* A quick-and-dirty way of installing Vim plugins
+* Keeping your workspace organized when working with multiples or long files using buffers, windows, tabs, and folds
+* Navigating complex files trees without leaving Vim with Netrw, NERDTree, Vinegar, or CtrlP
+* Advanced navigation throughout a file, and covering more types of text objects: using movement plugin
+* Copying and pasting with the pwer of registers
+
+## Installing plugins
+
+1.- You'll need to create a directory to store plugins. Execute the following on the command line:
+
+>     mkdir -p ~/.vim/pack/plugins/start
+
+#### TIP
+
+If you're sing GVim under Windows, you'll have to create the *vimfiles* directory under your user folder(usually *C:\Users\<username>)*, and then create *pack\plugins\start* folders inside of it.
+
+2.- You'll want to tell Vim to load documentation for each plugin, as it doesn't do so automatically. For that, add the following lines to your *~/.vimrc* file:
+
+>     packloadall         " Load all plugins.
+>     silent! helptag ALL " Load help files for all plugins.
+
+Now, every time you want to add a plugin, you'll have to:
+
+1.- Find your plugin on GitHub. For example, let's install *https://github.com/scrooloose/nerdtree*. If you have Git installed, find the Git repository URL(in this case, it's *https://github.com/scrooloose/nerdtree.git*) and run the following:
+
+>     git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/plugins/start/nerdtree
+
+#### TIP
+
+If you don't have Git installed, or if you're installing a plugin for GVim under Windows, navigate to the plugin's GitHub page, and find a **Clone or download** button. Download the ZIP archive and unpack it into *.vim/pack/plugins/start/nerdtree* in Linux or *vimfiles/pack/plugins/start/nerdtree* in Windows.
+
+2.- Restart Vim, and the plugin should be available to use.
+
+
 
