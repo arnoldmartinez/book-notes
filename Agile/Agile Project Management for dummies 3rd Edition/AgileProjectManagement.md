@@ -1,4 +1,4 @@
-##Creating a Product Roadmap
+### Creating a Product Roadmap
 
 Is an overall view of the product's requirements and a valuable
 tool for planning and organizing the journey of product development.
@@ -216,3 +216,70 @@ backlog estimate*.
 
 ### CHAPTER 10
 ## Planing Releases and Sprints
+
+### Refining requirements and estimates
+
+One clear, effective pattern for defining product requirements is the
+user story.
+
+### What is a user story?
+
+The *user story* is a simple description of a product requirements in
+terms of what that requirements must accomplish for whom.
+
+You user story will have, at a minimum, the following parts:
+
+Title (recognizable name for the user story)
+As a (type of user)
+I want to (take this action)
+so that (I get this benefit)
+
+The user story should also be supported by a list of
+validation steps (acceptance criteria) to take so you can confirm
+whether the working requirement for the user story is correct.
+Acceptance criteria follows this pattern:
+
+When I (take this action), (this happens)
+
+User story may also include the following:
+
+* **A user story ID:** A unique identifying number to differentiate
+from other user stories in the *product backlog*.
+* **The user story value and effort estimate:** *Value* is how beneficial
+a user story might be to the organization creating that 
+product. *Effort* is the ease or difficulty in creating that user
+story.
+* **The name of the person who thought of the user story:**
+Anyone can create a user story.
+
+![alt text](img/ch10-figure-10-1.png)
+
+It is not the sole
+responsibility of the product owner to write user 
+stories. The development team and other stakeholders are
+also involved in creating and decomposing user stories 
+to ensure clarity and shared understanding across the 
+scrum team.
+
+### Steps to create a user story
+
+When creating a user story, follow these steps:
+
+* **Identifying the stakeholders.**
+* **Identifying who will use the product.**
+* **Working with the stakeholders, write down, in a 
+user story format, what the product will need to 
+do.**
+
+#### Identifying the stakeholders
+
+Anyone involved with, affected by, or
+who can affect the product and its creation. Stakeholders
+provide valuable feedback about every product
+increment you deliver each sprint.
+
+You will work with stakeholders also when you 
+create the product vision and product roadmap.
+
+#### Identifying users
+
