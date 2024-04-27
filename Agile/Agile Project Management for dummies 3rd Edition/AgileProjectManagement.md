@@ -271,7 +271,7 @@ When creating a user story, follow these steps:
 user story format, what the product will need to 
 do.**
 
-#### Identifying the stakeholders
+#### Identifying product stakeholders
 
 Anyone involved with, affected by, or
 who can affect the product and its creation. Stakeholders
@@ -283,3 +283,82 @@ create the product vision and product roadmap.
 
 #### Identifying users
 
+Know who your users are, so you can develop features they'll actually use.
+
+Suppose that you're the product owner for the XYZ Bank's mobile banking product. You're responsible for the department that will
+bring the product to market, preferably in the next sis months. You have the following ideas about the application's users:
+
+* The customers (the end users of the application) probably want quick access to up-to-date information about their balances and 
+  recent transactions.
+* Maybe the customer are about to buy a large-ticket item, and they want to make sure they can charge it.
+* Maybe the customers' ATM cards were just refused, but they have no idea why, and they want to check recent transactions for
+  possible fraudulent activities.
+* Maybe the customers just realized that they forgot to pay their credit card bill and will have penalty charges if they don't pay
+  the card today.
+
+Who are you personas for this application? Here are a few examples:
+
+* **Personas #1:** Jason is a young, tech-savvy executive who travels a lot. When he has a spare moment, he wants to handle per-
+  sonal business quickly. He carefully invest his money in high-interest portfolios. He keeps his available cash low.
+* **Persona #2:** Carol is a small-business owner who stages properties when clients are trying to sell their home. She shops at con-
+  signment centers and often finds furnishings she wants to buy for the clients.
+* **Persona #3:** Nick is a student who lives on student loans and a part-time job. He knows he can be flaky with money because 
+  hi´s flaky with everything else. He just lost his checkbook.
+
+Your product stakeholders can help you create personas. Find people ho are experts on the day-to-day business for your 
+product. Those stakeholders will know a lot about your potential customers.
+
+### Determining product requirements and creating user stories
+
+Have the stakeholders write down as many requirements as they can think of, using the user story format. One user story for the 
+product and personas from the previous sections might be as follows:
+
+* From side of card:
+  * **Title** See bank account balance
+  * **As** Jason,
+  * **I want to** see my checking account balance on my smartphone
+  * **so that** I can decide whether I have enough money in my account to make a transaction
+* Back side of card:
+  * **When I** sign into the XYZ Bank mobile application, my checking account balance appears.
+  * **When I** sign into the XYZ Bank mobile application after making a purchase or a deposit, my checking account balance reflects that purchase or deposit.
+
+Be sure to continuously add and prioritize new user stories to your product backlog. Keeping your product backlog up-to-
+date will help you have the highest-priority user stories when it is time to plan your sprint.
+
+![alt text](img/ch10-figure-10-2.png)
+
+## Breaking down requirements
+
+You refine requirements many times throughout development. For example:
+
+* When you create the product roadmap, you create *features* (capabilities your customers will have after you
+  develop the features), as well as *themes* (logical groups of features). Although features are intentionally large, we require fea-
+  tures at the product roadmap level to be no larger than 144 story points on the Fibonnaci scale. Both features and themes are considered 
+  large by a development team.
+* When you plan releases, you break down the features into more concise user stories. User stories at the release plan level can 
+  be either *epics*, very large user stories with multiple actions, or individual user stories, which contain a single action. For our 
+  clients, user stories at the release plan level should be no larger than 34 story points.
+* When you plan sprints, you break down requirements even further. User stories are broken down to eight points or fewer.
+
+![alt text](img/ch10-figure-10-3.png)
+
+To decompose requirements, you'll want to think about how to break down the requirement into individual actions. *Table 10-1*
+shows a requirements from the XYZ Bank application introduced in **Cahpter 9** that is decomposed from the theme level down to the 
+user story level.
+
+![alt text](img/ch10-table-10-1.png)
+
+## USER STORIES AND THE INVEST APPROACH
+You may be asking, just how decomposed does a user story have to be? Bill Wake, in his blog at XP123.com, describes the INVEST approach to 
+ensure quality in user stories. We like his methods so much we include it here.
+
+Using the INVEST approach, user stories should be
+* **Independent:** To the extent possible, a user story should need no other user sotires to implement the feature that the story describes.
+* **Negotiable:** Not overly detailed. The user story has room for discussion and an expansion of details.
+* **Valuable**: The user story demonstrates product value to the customer. It describes features, not technical tasks to implement it. The user
+  story is in the user's language and is easy to explain. The people using the product or system can understand the user story.
+* **Estimable:** The story is descriptive, accurate, and concise, so the developers can generally estimate the work necessary to create the
+  functionality in the user story.
+* **Small:** It is easier to plan and accurately estimate small user stories. A good rule of thumb is that the development team can complete 6-10
+  user stories in a sprint.
+* **Testable:** You can easily validate the user story, and the results are definitive.
