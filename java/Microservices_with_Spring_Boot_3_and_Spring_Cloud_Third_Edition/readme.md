@@ -121,4 +121,21 @@ database or another microservice.
 In 2013, key principles for designing reactive systems were 
 established in The Reactive Manifesto https://www.reactivemanifesto.org/
 
+### Central configuration
 
+##### Problem
+
+An application is,traditionally, deployed together with its configuration, for example, a set of
+environment variables and/or files containing configuration information.
+
+##### Solution
+
+Add a new component, a **configuration server**, to the system landscape to store the configuration of all
+the microservices, as illustrated by the following diagram:
+
+![alt text](img/ch1_figure_1.11.png)
+
+##### Solution requirements
+
+Make it possible to store configuration information for a group of microservices in one place, with
+different settings for different environments (for example, **dev**, **test**, **qa** and **pro**).
