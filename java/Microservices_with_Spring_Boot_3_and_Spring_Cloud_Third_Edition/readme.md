@@ -139,3 +139,31 @@ the microservices, as illustrated by the following diagram:
 
 Make it possible to store configuration information for a group of microservices in one place, with
 different settings for different environments (for example, **dev**, **test**, **qa** and **pro**).
+
+### Centralized log analysis
+
+##### Problem
+
+Traditionally, an application writes log events to log files that are stored in the local filesystem of the
+server that application runs on.
+
+##### Solution
+
+Add a new component that can manage **centralized logging** and is capable of the following:
+
+- Detecting new microservice instances and collecting log events from them
+- Interpreting and storing log events in a structured and searchable way in a central database
+- Providing APIS and graphical tools for querying and analyzing log events
+
+##### Solution requirements
+
+Some solution requirements are as follows:
+
+- Microservices stream log events to standard system output, **stdout**. This makes it easier for a log
+  collector to find the log events compared to when log events are written to microservice-specific log files.
+- Microservices tag the log events with the correlation ID described in the next section regarding the
+  *Distributed tracing design pattern*
+- A canonical log format is defined, so that log collectors can transform log events collected from
+  the microservices to a canonical log format before log events are stored in the central database.
+  Storing log events in a canonical log format is required to be able to query and analyze the
+  collected log events.
