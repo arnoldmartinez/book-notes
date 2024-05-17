@@ -167,3 +167,33 @@ Some solution requirements are as follows:
   the microservices to a canonical log format before log events are stored in the central database.
   Storing log events in a canonical log format is required to be able to query and analyze the
   collected log events.
+
+### Distributed tracing
+
+##### Problem
+It must be possible to track requests and messages that flow between microservices while processing and external
+request to the system landscape.
+
+![alt text](img/ch1_figure_1.13.png)
+
+##### Solution
+
+To track the processing between cooperating microservices, we need to ensure that all related requests and
+messages are marked with a common **correlation ID** and that the correlation ID is part of all log events. Based on a
+correlation ID, we can use the centralized logging service to find all related log events. If one of the log events also
+includes information about a business-related identifier, for example, the ID of a customer, product, or order, we
+can find all related log events log events for that business identifier using the correlation ID.
+
+To be able to analyze delays in a call chain of cooperating microservices, we must be able to collect timestamps for
+when request, responses, and messages enter and exit each microservice.
+
+##### Solution requirements
+
+- Assign unique correlation IDs to all incoming or new request and events in a well-known place, such as a
+  header with a standardized name
+- When a microservice makes an outgoing request or sends a message, it must add the correlation ID to the 
+  request and message
+- All log events must include the correlation ID in a predefined format so that the centralized logging service
+  can extract the correlation ID from the log event and make it searchable
+- Trace records must be created for when requests, responses, and messages both enter and exit a 
+  microservice instance
