@@ -197,3 +197,36 @@ when request, responses, and messages enter and exit each microservice.
   can extract the correlation ID from the log event and make it searchable
 - Trace records must be created for when requests, responses, and messages both enter and exit a 
   microservice instance
+
+### Circuit braker
+
+##### Problem
+
+A system lanscape of microservices that uses synchronous intercommunication can be exposed to a
+**chain of failure**. If one microservice stops responding, its client might get into problems as well and stop
+responding to request from their clients. The problem can propagate recursively throughout a system
+landscape and take out major parts of it.
+
+This is especially common in cases where synchronous requests are executed using blocking I/O, that is,
+blocking a thread from the underlying operating system while a request is being processed. Combined
+with a large number of concurrent requests and a service that starts to respond unexpectedly slowly,
+thread pools can quickly become drained, causing the caller to hang and/or crash. This failure can 
+spread unpleasantly quickly to the caller's caller, and so on.
+
+##### Solution
+
+- **Open** the circuit and fail fast(without waiting for a timeout) if problem with the service are
+  detected.
+- Probe for failure correction(also known as a **half-open** circuit); that is, allow a single request to go
+  through on a regular basis to see whether the service is operating normally again.
+- **Close** the circuit if the probe detects that the service is operating normally again. This capability is very important
+  since it makes the system landscape resilient to these kinds of problem.
+
+The following diagram illustrate a scenario where all synchronous communication within the system landscape of
+microservices goes through circuit breakers. All the circuit breakers are **closed**; they allow traffic, except for one circuit breaker
+(for **Microservice E**) that has detected problems in the service the requests go to. Therefore, this circuit breaker is open and
+utilizes fast-fail logic; that is, it does not call the failing service and waits for a timeout to occur. Instead, **Microservice E** can
+immediately return a  response, optionally applying some fallback logic before responding:
+
+![alt text](img/ch1_figure_1.14.png)
+
