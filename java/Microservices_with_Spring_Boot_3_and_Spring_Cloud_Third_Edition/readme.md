@@ -230,3 +230,21 @@ immediately return a  response, optionally applying some fallback logic before r
 
 ![alt text](img/ch1_figure_1.14.png)
 
+### Control loop
+
+##### Problem
+
+In a large number of microservices instances spread out over a number of instances, it is very difficult to manually 
+detect and correct problems such as crashed or hung microservice instances.
+
+##### Solution
+
+Add new component, a **control loop**, to the system landscape.
+
+![alt text](img/ch1_figure_1.15.png)
+
+##### Solution requirements
+
+The control loop will constantly observe the **actual state** of the system landscape, comparing it with 
+a **desired state**, as specified by the operators. If the two states differ, it will take action to make the
+actual state equal to the desired state.
