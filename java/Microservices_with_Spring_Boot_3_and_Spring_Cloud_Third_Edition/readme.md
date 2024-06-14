@@ -248,3 +248,34 @@ Add new component, a **control loop**, to the system landscape.
 The control loop will constantly observe the **actual state** of the system landscape, comparing it with 
 a **desired state**, as specified by the operators. If the two states differ, it will take action to make the
 actual state equal to the desired state.
+
+### Centralized monitoring and alarms
+
+##### Problem
+
+If observed response times and/or the usage of hardware resources becomes unacceptably high, it can 
+be very hard to discover the root cause of the problem.
+
+##### Solution
+
+We add a new component, a **monitor service**, to the system landscape, which is capable of collecting
+metrics about hardware resources usage for each microservice instance level.
+
+##### Solution Requirements
+
+The solution requirements are as follows:
+
+* It must be able to collect metrics from all the servers that are used by the system landscape, 
+  which includes autoscaling servers
+* It must be able to detect new microservice instances as they are launched on the available
+  servers and start to collect metrics from them
+* It must be able to provide APIs and graphical tools for querying and analysing the collected
+  metrics
+* It must be possible to define alerts that are triggered when a specified metric exceeds s specified 
+  threshold value
+
+The following screenshot shows Grafana, which visualizes metrics from Prometheus, a monitoring
+tool
+
+![image 16](img/ch1_figure_1.16.png)
+
