@@ -279,3 +279,109 @@ tool
 
 ![image 16](img/ch1_figure_1.16.png)
 
+## Introduction to Spring Boot
+### Convention over configuration and fat JAR files
+
+Spring Boot targets the fast development of production-ready Spring applications by being strongly
+opinionated about how to set up core modules from the Spring Framework and third-party
+products, such as libraries that are used for logging or connecting to a database. Spring Boot does that
+applying a number of conventions by default. Whenever required, each convention ca be overridden by writing
+some configuration, case by case.
+
+Added to the usage of convention over configuration, Spring Boot also favors a runtime model based
+on a standalone JAR file, also known as a **fat JAR file**.
+
+A fat JAR file contains not only the classes and resource files of the application itself but also all the
+JAR files the application depends on. This means that the fat JAR file is the only JAR file required to run
+the application; that is, we only need to transfer one JAR file to an environment where we want to run the
+application instead of transferring the application's JAR file along with all the JAR files the application 
+depends on.
+
+Starting a fat JAR requires no separately installed Java EE web server, such as Apache Tomcat. Instead,
+it can be started with a simple command such as *java -jar app.jar*.
+
+### The magic @SpringBootApplication annotation
+
+With the @SpringBooApplication annotation. The following code shows this:
+
+```
+@SpringBootApplication
+public static void main(String[] args) {
+  SpringApplication.run(MyApplication.class, args);
+}
+```
+The following functionality will be provided by this annotation:
+
+* It enables component scanning, that is, looking for Spring components and configuration
+  classes in the package of the application class and all its sub-packages.
+* The application class itself becomes a configuration class.
+* It enables autoconfiguration, where Spring Boot looks for JAR files in the classpath that it can
+  configure automatically. For example, if you have Tomcat in the classpath, Spring boot will
+  automatically configure Tomcat as an embedded web server.
+
+### Component scanning
+
+Let's assume we have the following Spring component in the package of the application class:
+
+```
+@Component
+public class MyComponentImpl implements MyComponent { ... }
+```
+
+Another component in the application can get this component automatically injected, also known as 
+**auto-wired**, using the @Autowired annotation:
+
+```
+public class AnotherComponent {
+  private final MyComponent myComponent;
+  
+  @Autowired
+  public AnotherComponent(MyComponent myComponent) {
+    this.myComponent = myComponent;
+  }
+}
+```
+
+```
+NOTE: 
+I prefer using constructor injection(over field and setter injection) to keep the state in my
+components immutable. An immutable state is important if you want to be able to run
+the component in a multithreaded runtime environment.
+```
+
+If we want to use component that are declared in a package outside the application's package, for
+example, a utility component shared by multiple Spring Boot applications, we can complement the
+@SpringBootApplication annotation in the application class with a @ComponentScan annotation:
+
+```
+package se.magnus.myapp;
+
+  @SpringBootApplication
+  @ComponentScan({"se.magnus.myapp", "se.magnus.util"})
+  public class MyApplication { ... }
+```
+
+We can now auto-wired components from the se.magnus.util package in the application code, for
+example, a utility component named MyUtility, as follows:
+
+```
+package se.magnus.util;
+
+@Component
+public class MyUtility { ... }
+```
+
+This utility component can be auto-wired in an application component like so:
+
+```
+package se.magnus.myapp.services;
+public class AnotherComponent {
+  private final MyUtility myUtility;
+  
+  @Autowired
+  public AnotherComponent(MyUtility myUtility) {
+    this.myUtility = myUtility;
+  }
+}
+```
+
