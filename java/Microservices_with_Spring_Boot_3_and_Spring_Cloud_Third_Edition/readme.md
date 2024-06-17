@@ -385,3 +385,28 @@ public class AnotherComponent {
 }
 ```
 
+### Java-based configuration
+
+If we want to override Spring Boot's default configuration or we want to add 
+our own configuration, we can simply annotate a class with @Configuration.
+
+For example, if we want to set up a filter in the processing of HTTP request 
+that writes a log message at the beginning and the end of the processing, we 
+can configure a log filter, as follows:
+
+```
+@Configuration
+public class SubscribeApplication {
+  CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+  filter.setIncludeQueryString(true);
+  filter.setIncludePayload(true);
+  filter.setMaxPayloadLenght(5120);
+  return filter;
+}
+```
+
+```
+NOTE:
+We can also place the configuration directly in the application class since the
+@SpringBootApplication annotation implies the @Configuration annotation.
+```
