@@ -452,3 +452,139 @@ Java applications that communicate using web protocols such as HTTP.
 When we begin to develop our microservices as a container, port collisions will no longer be a problem.
 Each container has its own hostname and port range, so all microservices can use, for example, port
 **8080** without colliding with each ot other.
+
+### springdoc-openapi
+
+The Swagger specification from SmartBear Software is one of the most widely used ways of documenting 
+RESTful services.
+
+**springdoc-openapi** is a open source project, that can create OpenAPI-based API documentation at runtime.
+It does so by examining the application, for example, inspecting WebFlux and Swagger-based annotation.
+
+### Spring Data
+
+The two core concepts of the programming model in Spring Data are **entities** and **repositories**. 
+
+Even though Spring Data provides a common programming model for different types of databases,
+this doesn't mean that you will be able to write portable source code. For example, switching the
+database technology from a SQL database to a NoSQL database will, in general, not be possible 
+without some changes in the source code!
+
+#### Entity
+
+An entity describes the data will be stored by Spring Data.
+
+For example, an entity that will be stored in a relational database can be annotated with JPA annotations
+such as:
+
+```
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+
+@Entity
+@IdClass(ReviewEntityPK.class)
+@Table(name = "review")
+public class ReviewEntity {
+  @Id private int productId;
+  @Id private int reviewId;
+  private String author;
+  private String subject;
+  private String content;
+```
+
+If an entity is to be stored in a MongoDB database, annotations from the Spring Data MongoDB
+subproject can be used together with generic Spring Data annotations.
+
+```
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document
+public class RecommendationEntity {
+    @Id
+    private String id;
+    @Version
+    private int version;
+    private int productId;
+    private int recommendationId;
+    private String author;
+    private int rate;
+    private String content;
+```
+
+The **@Id and @Version annotations are generic annotations, while the **@Document** annotation is specific
+to the Spring Data MongoDB subproject.
+
+This can be revealed by studying the **import** statements; the **import** statements that contain
+**mongodb** come from the Spring Data MongoDB subproject.
+
+#### Repositories
+
+Repositories are used to store and access data from different types of databases. A repository can be declared
+as a Java interface, and Spring Data will generate its implementation on the fly using opinionated conventions.
+These conventions can be overridden and/or complemented by additional configuration and, if required, some Java
+code.
+
+Spring Data also comes with some base Java interfaces, for example, **CrudRepository**, to make the 
+definition of a repository even simpler. The base interface, **CrudRepository**, provides us with standard
+methods for **create**, **read**, **update**, and **delete** operations.
+
+To specify a repository for handling the JPA entity **ReviewEntity**, we only need to declare:
+
+```
+import org.springframework.data.repository.CrudRepository;
+public interface ReviewRepository extends 
+  CrudRepository<ReviewEntity, ReviewEntityPK> {
+  
+  Collection<ReviewEntity> findByProductId(int productId);
+}
+```
+
+We use a class, **ReviewEntityPK, to describe a composite primary key.
+
+```
+public class ReviewEntityPK implements Serializable {
+    public int productId;
+    public int reviewId;
+}
+```
+
+We added an extra method, **findByProductId, which allows us to look up **Review** entities
+based on **productId** - a field that is part of the primary key. The naming of the method follows a
+naming conventions defined by Spring Data that allows Spring Data to generate the implementation of
+this method on the fly as well.
+
+If we want to use the repository, we can simply inject it and then start to use it.
+
+```
+private final ReviewRepository repository;
+@Autowired
+public ReviewService(ReviewRepository repository) {
+ this.repository = repository;
+}
+public void someMethod() {
+  repository.save(entity);
+  repository.delete(entity);
+  repository.findByProductId(productId);
+```
+
+Spring Data also provides a reactive base interface, **ReactiveCrudRepository, which enables reactive
+repositories. The method do not return objects or collections of objects; instead, they return **Mono** 
+and **Flux** objects are reactive streams that are capable of returning either **0...1** or **0...m**
+entities as they become available on the stream.
+
+The reactive-based interface can only be used by Spring Data subproject that support reactive
+database drivers; that is, they are based on non-blocking I/O. The Spring Data MongoDB subproject
+supports reactive repositories, while Spring Data JPA does not.
+
+Specifying a reactive repository for handling the MongoDB entity, **RecommendationEntity**.
+
+```
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import reactor.core.publisher.Flux;
+public interface RecommendationRepository extends ReactiveCrudRepository<RecommendationEntity, String> {
+    Flux<RecommendationEntity> findByProductId(int productId);
+}
+```
