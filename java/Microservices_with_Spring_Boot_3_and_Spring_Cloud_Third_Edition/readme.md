@@ -410,3 +410,45 @@ NOTE:
 We can also place the configuration directly in the application class since the
 @SpringBootApplication annotation implies the @Configuration annotation.
 ```
+
+### What's new in Spring Boot 3.0
+
+The most important new items in Spring Boot 3.0 are the following:
+
+* **Observability**
+  The new distributed tracing support for metrics and logging in previous Spring
+  Boot releases. The new Observability API in Spring Framework v6.0 and also 
+  a new module named Micrometer Tracing. Micrometer is based on Spring Cloud Sleuth.
+* **Native compilation**
+  Support for compiling Spring Boot applications to native images, which are 
+  standalone executables files.
+* **Virtual threads**
+  Support for lightweight threads called virtual threads. Virtual threads are expected
+  to simplify the programming model for developing reactive non-blocking microservices.
+
+### Spring WebFlux
+
+Spring Boot 3.0 is based on the Spring Framework 6.0 which has built-in support for developing reactive
+applications. The Spring framework uses **Project Reactor** as the base implementation of its reactive
+support and also comes with a new web framework, **Spring WebFlux**, which supports the development of
+reactive, that is, non-blocking, HTTP clients and services.
+
+Spring WebFlux supports two different programming models:
+
+* An annotation-based imperative style, similar to the already existing web framework, Spring Web
+  MVC, but with support for reactive services.
+* A new function-oriented model based on routers and handlers.
+
+Spring WebFlux also provides a fully reactive HTTP client, **WebClient**, as a complement to the existing
+**RestTemplate** client.
+
+Spring WebFlux supports running on a servlet container based on the Jakarta Servlet specification v5.0 or
+higher, such as Apache Tomcat, but also supports reactive non-servlet-based embedded web servers
+such as Netty.
+
+The Servlet specification is a specification in the Java EE platform that  standardizes how to develop
+Java applications that communicate using web protocols such as HTTP.
+
+When we begin to develop our microservices as a container, port collisions will no longer be a problem.
+Each container has its own hostname and port range, so all microservices can use, for example, port
+**8080** without colliding with each ot other.
