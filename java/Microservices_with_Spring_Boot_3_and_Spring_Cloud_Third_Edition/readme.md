@@ -694,3 +694,47 @@ void sampleCreateAPI(@RequestBody String body) {
   streamBridge.send("myProcessor-in-0", body);
 }
 ```
+
+### Docker
+
+For most of the microservices we will look at in this book, a **Dockerfile** such as the following is all that is required to
+run the microservice as a Docker container:
+
+```
+FROM openjdk:17
+MAINTAINER Magnus Larsson <magnus.larsson.ml@gmail.com>
+EXPOSE 8080
+ADD ./build/libs/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
+
+If we want to start and stop many containers with one command, **Docker Compose** is the perfect tool. Docker
+Compose uses YAML file to describe the containers to be managed.
+
+```
+product:
+ build: microservices/product-service
+recommendation:
+ build: microservices/recommendation-service
+review:
+  build: microservices/review-service
+composite:
+  build: microservices/product-composite-service
+  ports:
+    - "8080:8080"
+```
+
+* The **build** directive is used to specify which Dockerfile to use for each microservice. Docker Compose will
+  use it to build a Docker image and then launch a Docker container based on that Docker image.
+* The **ports** directive for the composite service is used to exposed por **8080** on the server where Docker runs.
+  On a developer's machine, this means that the port of the composite service can be reached simply by using 
+  **localhost:8080!**
+
+All the containers in the YAML files can be managed with simple commands such as the following:
+
+* **docker-compose up -d**: Starts all containers. **-d** means that the containers run in the background, not 
+  locking the terminal from  where the command was executed.
+* **docker-compose down**: Stops and removes all containers.
+* **docker-compose logs -f --tail=0**: Prints out log messages from all containers. **-f** means that the 
+  command will not complete, and instead waits for new log messages. **--tail=0** means that we don't want
+  to see any previous log messages, only new ones.
