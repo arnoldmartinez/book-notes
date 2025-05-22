@@ -368,3 +368,11 @@ UML proporciona notación para los diagramas de casos de uso con el fin de ilust
 nombres de los casos de uso y los actores, y las relaciones entre ellos.
 
 ![Figura 6.2](../UML_Y_PATRONES_2DA_EDICION/img/ch06/6.2.png "Lista de actores")
+
+## MODELO DE CASOS DE USO: REPRESENTACIÓN DE LOS DIAGRAMAS DE SECUENCIA DEL SISTEMA
+
+#### Introducción
+
+Un diagrama de secuencia del sistema es un artefacto creado de manera rápida y fácil,
+que muestra los eventos de entrada y salida relacionados con el sistema que se está 
+estudiando.
