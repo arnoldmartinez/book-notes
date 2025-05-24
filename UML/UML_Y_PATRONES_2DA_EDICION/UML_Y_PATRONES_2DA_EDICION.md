@@ -367,7 +367,7 @@ organizaciones, software y maquinas.
 UML proporciona notación para los diagramas de casos de uso con el fin de ilustrar los
 nombres de los casos de uso y los actores, y las relaciones entre ellos.
 
-![Figura 6.2](../UML_Y_PATRONES_2DA_EDICION/img/ch06/6.2.png "Lista de actores")
+![Figura 6.2](img/ch06/6.2.png "Lista de actores")
 
 ## MODELO DE CASOS DE USO: REPRESENTACIÓN DE LOS DIAGRAMAS DE SECUENCIA DEL SISTEMA
 
@@ -376,3 +376,47 @@ nombres de los casos de uso y los actores, y las relaciones entre ellos.
 Un diagrama de secuencia del sistema es un artefacto creado de manera rápida y fácil,
 que muestra los eventos de entrada y salida relacionados con el sistema que se está 
 estudiando.
+
+El **comportamiento del sistema** es una descripción de *qué* hace el sistema, sin explicar
+cómo lo hace. Una parte de esa descripción es un diagrama de secuencia del sistema.
+
+#### Diagramas de secuencia del sistema
+
+UML incluye los **diagramas de secuencia** como notación que puede representar
+las interacciones de los actores y las operaciones que inician.
+
+Un **Diagrama de secuencia del sistema** (DSS) es un dibujo que muestra, para un 
+escenario específico de un caso de uso, los eventos que generan los actores externos, el
+orden y los eventos entre los sistemas.
+
+Este ejemplo muestra el escenario principal de éxito del caso de uso *Procesar Veta*.
+Se indica que el cajero genera los eventos del sistema, *crearNuevaVenta*, 
+*introducirArticulo*, *finalizarVenta*, y *realizarPago*. 
+
+![Figura 9.1](img/ch09/9.1.png)
+
+#### DSS y los casos de uso
+
+Un DSS muestra los eventos del sistema para un escenario de un caso de uso, por tanto,
+se genera para el estudio de un caso de uso
+
+![Figura 9.2](img/ch09/9.2.png)
+
+![Figura 9.3](img/ch09/9.3.png)
+
+#### Asignación de nombres a los evetos y operaciones
+
+Los eventos del sistema(y sus operaciones asociadas) deberían expresarse al 
+nivel de intenciones en lugar de en términos del medio de entrada físico o a nivel de
+elementos de la interfaz de usuario.
+
+![Figura 9.4](img/ch09/9.4.png)
+
+#### Mostrar texto del caso de uso
+El texto proporciona los detalles y el contexto; el diagrama resume visualmente la
+interacción.
+
+![Figura 9.5](img/ch09/9.5.png)
+
+
+
