@@ -55,3 +55,17 @@
 * **Visitor**: construye una operación a realizar en los elementos de un conjunto de
   objetos. Es posible agregar nuevas operaciones sin modificar las clases de estos
   objetos.
+
+## Introducción a los patrones de construcción
+## Presentación
+
+Los patrones de construcción tienen la vocación de abstraer los mecanismos de creación
+de objetos. Un sistema que utilice estos patrones se vuelve independiente de la forma en
+que se crean los objetos, en particular, de los mecanismos de instanciación de las clases
+concretas.
+
+## El patrón Abstract Factory
+## Descripción
+Su objetivo es la creación de objetos agrupados en familias sin tener que conocer las clases
+concretas destinadas a la creación de estos objetos.
+
