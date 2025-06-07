@@ -326,3 +326,228 @@ public class Catalogo {
   }
 }
 ```
+
+## El patrón Builder
+
+### Descripción
+
+El objetivo es abstraer la construcción de objetos complejos de su implementación, 
+de modo que un cliente pueda crear objetos complejos sin tener que preocuparse de 
+las diferencias en su implementación.
+
+### Ejemplo:
+
+Durante la compra de un vehículo, el vendedor crea todo un conjunto de documentos 
+que contienen en especial la solicitud de pedido y la solicitud de matriculación del 
+cliente. Es posible construir estos documentos en formato HTML o en formato PDF 
+según la elección del cliente. En el primer caso, el cliente le provee una instancia de la
+clase ConstructorDocumentaciónVehículoHtml y, en el segundo caso, una instancia de 
+la clase ConstructorDocumentaciónVehículoPdf. El vendedor realiza, a continuación, la
+solicitud de creación de cada documento mediante esta instancia.
+
+De este modo el vendedor genera la documentación con ayuda de los métodos
+construyeSolicitudPedido y construyeSolicitudMatriculación.
+
+El conjunto de clase del patrón Builder para este ejemplo se detalla en la figura 5.1.
+Esta figura muestra la jerarquía entre las clases ConstructorDocumentaciónVehículo y 
+Documentación. El vendedor puede crear las solicitudes del pedido y las solicitudes de
+matriculación sin conocer las subclases de ConstructorDocumentaciónVehículo ni las 
+de Documentación.
+
+Las relaciones de dependencia entre el cliente y las subclases de
+ConstructorDocumentaciónVehículo se explican por el hecho de que el cliente crea una 
+instancia de estas subclases.
+
+La estructura interna de las subclases concretas de Documentación no se muestra (entre
+ellas, por ejemplo, la relación de composición de la clase Documento).
+
+![El patrón Builder aplicado a la generación de documentación](img/5.1.png)
+
+### Estructura
+#### 1. Diagrama de clases
+La figura 5.2 detalla la estructura genérica del patrón
+
+![Estructura del patrón Builder](img/5.2.png)
+
+#### 2. Participantes
+
+Los participantes del patrón son los siguientes:
+
+* ConstructorAbstracto (ConstructorDocumentaciónVehículo) es la clase que
+  define la firma de los métodos que construyen las distintas partes del producto
+  así como la firma del método que permite obtener el producto, una vez
+  construido
+* ConstructorConcreto (ConstructorDocumentaciónVehículoHtml y 
+  ConstructorDocumentaciónVehículoPdf) es la clase concreta que implementa
+  los métodos del constructor abstracto.
+* Producto (Documentación) es la clase que define el producto. Puede ser
+  abstracta y poseer varias subclases concretas (DocumentaciónHtml y
+  DocumentaciónPdf) en caso de implementaciones diferentes.
+* Director es la clase encargada de construir el producto a partir de la interfaz del
+  constructor abstracto.
+
+#### 3. Colaboraciones
+
+El cliente crea un constructor concreto y un director. El director construye, bajo
+demanda del cliente, invocando al constructor y reenviando el resultado al cliente.
+
+La figura 5.3 ilustra este funcionamiento con un diagrama de secuencia UML.
+
+![Diagrama de secuencia del patrón Builder](img/5.3.png)
+
+### Dominios de uso
+
+El patrón se utiliza en los dominios siguientes:
+
+* Un cliente necesita construir objetos complejos sin conocer su implementación.
+* Un cliente necesita construir objetos complejos que tienen varias 
+  representaciones o implementaciones.
+
+### Ejemplo
+Por motivos de simplicidad, los documentos son cadenas de caracteres para la
+documentación en formato HTML y PDF. El método imprime muestra las distintas
+cadenas de caracteres que representan los documentos.
+
+```
+public abstract class Documentacion {
+  protected List<String> contenido = new ArrayList<String>();
+  
+  public abstract void agregaDocumento(String documento);
+  public abstract void imprime();
+}
+```
+
+```
+public class DocumentacionHtml extends Documentacion {
+  public void agregaDocumento(String documento) {
+    if (documento.startsWith("<HTML>"))
+      contenido.add(documento);
+  }
+  
+  public void imprime() {
+    System.out.println("Documentacion HTML");
+    for (String s: contenido)
+      System.out.println(s);
+  }
+}
+```
+
+```
+public class DocumentacionPdf extends Documentacion {
+  public void agregaDocumento(String documento) {
+    if (documento.startWith("<PDF>"))
+      contenido.add(documento);
+  }
+  
+  public void imprime() {
+    System.out.println("Documentacion PDF");
+    for (String s: contenido)
+      System.out.println(s);
+  }
+}
+```
+
+El código fuente de las clases que generan la documentación aparece a
+continuación.
+
+```
+public abstract class ConstructorDocumentacionVehiculo {
+  protected Documentacion documentacion;
+  
+  public abstract void construyeSolicitudPedido(String nombreCliente);
+  public abstract void construyeSolicitudMatriculacion(String nombreSolicitante);
+  
+  public Documentacion resultado() {
+    return documentacion;
+  }
+}
+```
+
+```
+public class ConstructorDocumentacionVehiculoHtml extends ConstructorDocumentacionVehiculo {
+  public ConstructorDocumentacionVehiculoHtml() {
+    documentacion = new DocumentacionHtml();
+  }
+  
+  public void construyeSolicitudPedido(String nombreCliente) {
+    String documento;
+    documento = "<HTML>Solicitud de pedido Cliente: " + nombreCliente + "</HTML>";
+    documentacion.agregaDocumento(documento);
+  }
+  
+  public void construyeSolicitudMatriculacion(String nombreSolicitante) {
+    String documento;
+    documento = "<HTML>Solicitud de Matriculacion Solicitante: " + nombreSolicitante + "</HTML>";
+    documentacion.agregaDocumento(documento);
+  }
+}
+```
+
+```
+public class ConstructorDocumentacionVehiculoPdf extends ConstructorDocumentacionVehiculo {
+  public ConstructorDocumentacionVehiculoPdf() {
+    documentacion = new DocumentacionPdf();
+  }
+  
+  public void construyeSolicitudPedido(String nombreCliente) {
+    String documento;
+    documento = "<PDF>Solicitud de pedido Cliente: " + nombreCliente + "</PDF>";
+    documentacion.agregaDocumento(documento);
+  }
+  
+  public void construyeSolicitudMatriculacion(String nombreSolicitante) {
+    String documento;
+    documento = "<PDF>Solicitud de matriculacion Solicitante: " + nombreSolicitante + "</PDF>";
+    documentacion.agregaDocumento(documento);
+  }
+}
+```
+
+La clase Vendedor se describe a continuación. Su constructor recibe como
+parámetro una instancia de ConstructorDocumentacionVehiculo. Observe que el
+método construye toma como parámetro la información del cliente, aquí limitada
+al nombre del cliente.
+
+```
+public class Vendedor {
+  protected ConstructorDocumentacionVehiculo constructor;
+  
+  public Vendedor(ConstructorDocumentacionVehiculo constructor) {
+    this.constructor = constructor;
+  }
+  
+  public Documentacion construye(String nombreCliente) {
+    constructor.construyeSolicitudPedido(nombreCliente);
+    constructor.construyeSolicitudMatriculacion(nombreCliente);
+    Documentacion documentacion = constructor.resultado();
+    
+    return documentacion;
+  }
+}
+```
+
+Se proporciona el código Java del cliente del constructor, a saber la
+clase ClienteVehiculo que constituye el programa principal. El inicio de
+este programa solicita al usuario el constructor que debe utilizar, y se lo 
+proporciona a continuación al vendedor.
+
+```
+public class ClienteVehiculo {
+  public static void main(String[] args) {
+    Scanner reader = new Scanner(System.in);
+    ConstructorDocumentacionVehiculo constructor;
+    System.out.print("Desea generar " + "documentacion HTML (1) o PDF (2):");
+    String seleccion = reader.next();
+    
+    if (seleccion.equals("1")) {
+      constructor = new ConstructorDocumentacionVehiculoHtml();
+    } else {
+      constructor = new ConstructorDocumentacionVehiculoPdf();
+    }
+    
+    Vendedor vendedor = new Vendedor(constructor);
+    Documentacion documentacion = vendedor.construye("Martin");
+    documentacion.imprime();
+  }
+}
+```
