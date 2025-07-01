@@ -370,4 +370,17 @@ Can't find 35
 The process of separating the *how* from the *what*-- how an operation is performed
 inside a class, as opposed to what's visible to the class user--is called *abstraction*.
 
-### The 
+### The Ordered Workshop Apple
+
+Imagine an array in which the data items are arranged in order of ascending key values; that is,
+with the smallest value at index 0, and each cell holding a value larger than the cell below. Such
+an array is called an *ordered array*.
+
+When we insert an item into this array, the correct location must be found for the insertion: just
+above a smaller value and just below a larger one. Then all the larger values must be moved up to
+make room.
+
+Why would we want to arrange data in order? One advantage is that we can speed up search times 
+dramatically using a *binary search*.
+
+![2.5](images/2.5.png)
