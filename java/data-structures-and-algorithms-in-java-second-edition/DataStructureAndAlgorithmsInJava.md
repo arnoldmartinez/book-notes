@@ -384,3 +384,31 @@ Why would we want to arrange data in order? One advantage is that we can speed u
 dramatically using a *binary search*.
 
 ![2.5](images/2.5.png)
+
+
+### Binary Search
+### The Guess-a-Number Game
+
+Binary search uses the same approach you did as a kid. In this game, a friend asks you to guess
+a number she's thinking of between 1 and 100. When you guess a number, she'll tell you one of 
+three things: your guess is larger than the number she's thinking of, it's smaller, or you guessed 
+correctly.
+
+To find the number in the fewest guesses, you should always start by guessing 50, If she says you
+your guess is too low, you deduce the number the number is between 51 and 100, so your next guess
+should be 75 (halfway between 51 and 100). If she say it's too high, you deduce the number is 
+between 1 and 49, so your next guess should be 25.
+
+In a binary search each guess divides the range of possible values in half, so the number of guesses
+required is far fewer. Table 2.2 show a game session when the number to be guesses is 33.
+
+| Step Number | Number Guesses | Result   | Range of Possible Values |
+|-------------|----------------|----------|--------------------------|
+| 0           |                |          | 1-100                    |
+| 1           | 50             | Too high | 1-49                     |
+| 2           | 25             | Too low  | 26-49                    |
+| 3           | 37             | Too high | 26-36                    |
+| 4           | 31             | Too low  | 32-36                    |
+| 5           | 34             | Too high | 32-33                    |
+| 6           | 32             | Too low  | 33-33                    |
+| 7           | 33             | Correct  |             |
