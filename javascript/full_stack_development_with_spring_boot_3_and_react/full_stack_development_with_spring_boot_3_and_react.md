@@ -90,3 +90,111 @@ function App() {
 ```
 
 The react-dom package provides DOM-specific methods for us.
+
+main.jsx file
+
+```
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+)
+```
+
+The react-dom package provides DOM-specific methods for us. To render the React component to the DOM, we can use the 
+render method from the react-dom package. React.StrictMode is used to find potential problems in your React app and these
+are printed in the browser console. Strict Mode only runs in development mode.
+
+The **root API** is used to render React components inside a browser DOM node. we first create a root by passing the DOM
+element to the createRoot method. The root calls the render method to render an element to the root.
+
+```
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const container = document.getElementById('root');
+
+// Create a root
+const root = ReactDOM.createRoot(container);
+
+// Render an element to the root
+root.render(<App />);
+```
+
+The container in the root API is the <div id="root"></div> can be found in the index.html
+
+```
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+iml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite + React</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
+</html>
+```
+
+At the end of the source code, there is an export default statement that exports the component, and it can be made 
+available to other components by using the import statement
+
+```
+import {useState} from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+    const [count, setCount] = useState(0)
+    
+    return (
+        <div className="App">
+            <div>
+                <a href="https://vitejs.dev" target="_blank">
+                    <img src="{viteLogo}" className="logo" alt="Vite logo" />
+                </a>
+                <a href="https://reactjs.org" target="_blank">
+                    <img src="{reactLogo}" className="logo react" alt="React logo" />
+                </a>
+            </div>
+            <h1>Hello React</h1>
+            <div className="card">
+                <button onClick={() => setCount((count) => count + 1)}>
+                    count is {count}
+                </button>
+                <p>
+                    Edit <code>src/App.jsx</code> and save to test HMR
+                </p>
+            </div>
+            <p className="read-the-docs">
+                Click on the Vite and React logos to learm more
+            </p>
+        </div>
+    )
+}
+
+export default App
+```
+
+There can only be one export default statement per file, but there can be multiple named export statements. Default exports
+are commonly used to export React components. Named exports are commonly used to export specific functions or objects from
+module.
+
+```
+import React from 'react' // Import default value
+import { name } from ... // Import named value
+```
+
+```
+export default React // Default export
+export { name } // Named export
+```
