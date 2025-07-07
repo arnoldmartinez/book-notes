@@ -198,3 +198,38 @@ import { name } from ... // Import named value
 export default React // Default export
 export { name } // Named export
 ```
+
+### Const and variables
+
+Constants, or immutable variables, can be defined by using a **const** keyword. When using the const keyword, the variable
+content cannot be reassigned:
+
+```
+contst PI = 3.14159;
+```
+
+The const is block-scoped. This means that the const variable can only be used inside the block in which it is defined.
+If const is defined outside of any function or block, it becomes a global variable, and you should try to avoid this
+situation. 
+
+```
+let count = 10;
+
+if (count > 5) {
+    const total = count * 2;
+    console.log(total); // Prints 20 to console
+}
+
+console.log(total); // Error, outside the scope
+```
+
+The following example demonstrates what happens when const is an object or array:
+
+```
+const myObj = {foo: 3};
+myObj.foo = 5; // This is ok
+```
+
+When const is an object or array, its properties or elements can be updated.
+The **let** keyword allow you to decalre **mutable** block-scoped variables. The variables declared using **let** can be
+used inside the block in which it is declared(it can also be used inside sub-blocks).
