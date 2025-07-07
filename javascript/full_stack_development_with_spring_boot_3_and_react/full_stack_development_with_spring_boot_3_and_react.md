@@ -233,3 +233,57 @@ myObj.foo = 5; // This is ok
 When const is an object or array, its properties or elements can be updated.
 The **let** keyword allow you to decalre **mutable** block-scoped variables. The variables declared using **let** can be
 used inside the block in which it is declared(it can also be used inside sub-blocks).
+
+### Arrow functions
+
+The traditional way of defining a function in JavaScript is by using a **function** keyword.
+
+```
+function(x) {
+    return x * 2;
+}
+```
+
+When we use the ES6 arrow function, the function look like this:
+
+```
+x => x * 2
+```
+
+The function is a so-called **anonymous function**, and we can't call it. Anonymous function are often used as an argument
+for other functions. In JavaScript, functions are *first-class citizens* and you can store functions in variables.
+
+```
+const calc = x => x * 2;
+```
+
+Now, you can use the variable name to call the function
+
+```
+calc(5);
+```
+
+When you have more than one argument, you have to wrap the arguments in parenthesis and separate the arguments with a 
+comma to use the arrow function effectively.
+
+```
+const calcSum = (x, y) => x + y
+// function call
+calcSum(2, 3); // return 5;
+```
+
+If the function body is an expression, then you don't need to use the **return** keyword. When you have multiple lines
+in the function body, you have to use curly brackets and a **return** statement.
+
+```
+const calcSum = (x , y) => {
+    console.log('Calculating sum');
+    return x + y;
+}
+```
+
+If the function doesn't have any arguments, then you should use the empty parenthesis.
+
+```
+const sayHello = () => "Hello"
+```
