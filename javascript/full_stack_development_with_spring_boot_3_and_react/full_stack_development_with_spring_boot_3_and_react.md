@@ -316,3 +316,34 @@ const { firstName, lastName, email } = person;
 ```
 
 It creates three variables , firstName, lastName, and email, which get their values from the person object.
+
+### Classes and inheritance
+
+The keyword for defining classes is **class**. A class can have fields, constructors, and class methods.
+
+```
+class Person {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+}
+```
+
+Inheritance is performed with an **extends** keyword. The following sample code shows an **Employee** class that inherits
+a **Person** class. This means that it inherits all fields from the parent class andd can have its own fields that are 
+specific to **Employee**. In the constructor, we first call the parent class constructor by using the **super** keyword.
+That call is required by the rest of the code, and you will get an error if it is missing:
+
+```
+class Employee extends Person {
+    constructor(firstName, lastName, title, salary) {
+        super(firstName, lastName);
+        this.title = title;
+        this.salary = salary;
+    }
+}
+```
+
+**Babel** is a JavaScript compiler that is used to compile ES6 (or newer versions) to an older version that is compatible
+with all browsers.
