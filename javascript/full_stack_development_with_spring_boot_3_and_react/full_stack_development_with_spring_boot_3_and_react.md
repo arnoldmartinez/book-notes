@@ -393,3 +393,54 @@ import './App.js';
 ...
 <div className="App-header"> This is my app</div>
 ```
+
+## Props and state
+**Props** and **state** are the input data for rendering a component.
+### Props
+**Props** are inputs to components, and they are a mechanism to pass data from a parent component to its child component.
+Props are JavaScript objects, so they can contain multiple key-value pairs.
+
+Props are inmutable, so a component cannot change its props. A component can access props through the props object that is
+passed to the function component as a parameter.
+
+```
+function Hello() {
+    return <h1>Hello John</h1>;
+}
+```
+
+Instead of using a hardcoded name, we can pass a name to the Hello component by using props.
+
+```
+function Hello(props) {
+    return <h1>Hello {proprs.user}</h1>;
+}
+```
+
+The parent component can send props to the Hello component
+
+```
+<Hello user="John" />
+```
+
+You can also pass multiple props to a component
+
+```
+<Hello firstName="John" lastName="Johnson" />
+```
+
+Now, you can access both props in the component using the props object.
+
+```
+function Hello(props) {
+    return <h1>Hello {props.firstName} {props.lastName}</h1>;
+}
+```
+
+You can also use object destructuring to destructure a props object
+
+```
+function Hello({ firstName, lastName }) {
+    return <h1>Hello {firstName} {lastName}</h1>;
+}
+```
