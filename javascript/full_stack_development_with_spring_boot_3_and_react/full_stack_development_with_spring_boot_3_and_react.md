@@ -296,3 +296,23 @@ Template literals can be used to concatenate strings. You have to use backticks(
 let person = {firstName: 'John', lastName: 'Johnson'};
 let greeting = `Hello ${person.firstName} ${person.lastName}`;
 ```
+
+### Object destructuring
+
+Object destructuring feature allows you to extract values from an object and assign them to a variable.
+
+```
+conts person = {
+    firstName: 'John',
+    lastName: 'Johnson',
+    email: 'j.johnson@mail.com'
+};
+```
+
+You can destructure it using the following statement:
+
+```
+const { firstName, lastName, email } = person;
+```
+
+It creates three variables , firstName, lastName, and email, which get their values from the person object.
