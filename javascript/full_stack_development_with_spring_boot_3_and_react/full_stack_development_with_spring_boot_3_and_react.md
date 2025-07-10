@@ -347,3 +347,49 @@ class Employee extends Person {
 
 **Babel** is a JavaScript compiler that is used to compile ES6 (or newer versions) to an older version that is compatible
 with all browsers.
+
+### JSX and styling
+
+JavaScript XML (JSX) is the syntax extension for JavaScript. JSX prevents injection attacks because all values are escaped
+in JSX before they are rendered. You can embed JavaScript expressions in JSX by wrapping them with curly brackets.
+
+```
+function App(props) {
+    return <h1>Hello World {props.user}</h1>;
+}
+```
+
+You can also pass a JavaScript expressions as props.
+
+```
+<Hello count={2+2} />
+```
+
+You can use both inline and external styling with React JSX elements. This first one defines the style inside the **div**
+element:
+
+```
+<div style={{ height: 20, width: 200 }}>
+    Hello
+</div>
+```
+
+The second creates a style object first, which is then used in the **div** element. The object name should use the 
+**camelCase** naming convention:
+
+```
+const divStyle = { color: 'red', height: 30 };
+
+const MyComponent = () => (
+    <div style={divStyle}>Hello</div>
+);
+```
+
+You can import a style sheet into a React component. To reference classes from an external CSS file, you should use a
+**className** attribute.
+
+```
+import './App.js';
+...
+<div className="App-header"> This is my app</div>
+```
