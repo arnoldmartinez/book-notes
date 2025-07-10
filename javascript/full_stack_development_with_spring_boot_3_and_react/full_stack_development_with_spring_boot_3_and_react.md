@@ -287,3 +287,12 @@ If the function doesn't have any arguments, then you should use the empty parent
 ```
 const sayHello = () => "Hello"
 ```
+
+### Template literals
+
+Template literals can be used to concatenate strings. You have to use backticks(``) instead of single or double quotes:
+
+```
+let person = {firstName: 'John', lastName: 'Johnson'};
+let greeting = `Hello ${person.firstName} ${person.lastName}`;
+```
