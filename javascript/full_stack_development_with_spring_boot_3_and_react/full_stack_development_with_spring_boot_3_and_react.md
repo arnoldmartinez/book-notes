@@ -444,3 +444,97 @@ function Hello({ firstName, lastName }) {
     return <h1>Hello {firstName} {lastName}</h1>;
 }
 ```
+
+### State
+
+The component **state** is an internal data store that holds information that can change over time. The state also 
+affects the rendering of the component. When the state is updated, React schedules a re-render of the component. When
+the component re-renders, the state retains its latest values. State allows components to be dynamic and responsive to
+user interactions or other events.
+
+The state is created using the useState hook function. It takes one argument, which is the initial value of the state,
+and returns an array of two elements. The first element is the name of the state, and the second element is a function
+that is used to update the state value. 
+
+```
+const [state, setState] = React.useState(initialValue);
+```
+
+The next code creates a state variable called name, and the initial value is Jim:
+
+```
+const [name, setName] = React.useState('Jim');
+```
+
+You can also import the useState function from React
+
+```
+import React, { useState } from 'react';
+```
+
+Then, you don't need to type the React keyword
+
+```
+const [name, setName] = useState('Jim');
+```
+
+The value of the state can now be updated by using the setName function. This is the only way to modify the state value
+
+```
+setName('John');
+```
+
+You should never update the state value directly using the = operator. You will also get an error because you cannot
+reassign the const variable.
+
+```
+// Don't do this, UI won't re-render
+name = 'Jonh';
+```
+
+You can also define state using an object
+
+```
+const [name, setName] = useState({
+    firstName: 'John',
+    lastName: 'Johnson'
+});
+```
+
+You can update both the firstName and lastName state object parameters using the setName function
+
+```
+setName({ firstName: 'Jim', lastName: 'Palmer' })
+```
+
+If you want to do a partial update of the object, you can use the **spread operator**. It clones the name state object
+and updates the firstName value to be Jim
+
+```
+setName({ ...name, firstName: 'Jim' })
+```
+
+A state can be accessed by using the state name. The scope the state is the component, so it cannot be used outside 
+the component.
+
+```
+// Renders Hello John
+import React, { useState } from 'react';
+
+function MyComponent() {
+    const [firstName, setFirstName] = useState('John');
+    
+    return <div>Hello {firstName}</div>
+}
+```
+
+If you state is an object, then you can access it in the following way:
+
+```
+const [name, setName] = useState({
+    firstName: 'John',
+    lastName: 'Johnson'
+});
+
+return <div>Hello {name.firstName}</div>;
+```
