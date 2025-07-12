@@ -538,3 +538,41 @@ const [name, setName] = useState({
 
 return <div>Hello {name.firstName}</div>;
 ```
+
+### Stateless components
+
+The React **stateless component** is just a pure JavaScript function that takes props as an argument and return a React
+element 
+
+```
+function HeaderText(props) {
+    return (
+        <h1>
+            {props.text}
+        </h1>
+    )
+}
+
+export default HeaderText;
+```
+
+This is also called a **pure component**. React provides React.demo(), which optimizes the performance of pure functional
+components.
+
+```
+import React, { memo } from 'react';
+
+function HeaderText(props) {
+    return (
+        <h1>
+            {props.text}
+        </h1>
+    )
+}
+
+export default memo(HeaderText);
+```
+
+React renders a memorized result if the props are not changed. The React.memo() phrase also has a second argument, 
+**arePropsEquals()**, which you can use to customize rendering conditions. 
+
