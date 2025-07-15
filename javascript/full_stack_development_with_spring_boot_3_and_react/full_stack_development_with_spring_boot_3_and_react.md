@@ -679,3 +679,47 @@ setCount(preventCount => prevCount + 1)
 ```
 
 Now, the previous value is passed to the function, and the updated value is returned and saved to the count state.
+
+### Batching
+
+React uses **batching** in state updates to reduce re-renders. 
+
+```
+import { useState } from 'react';
+
+function App() {
+    const [count, setCount] = useState(0);
+    const [count2, setCount2] = useState(0);
+    
+    const increment = () => {
+        setCount(count + 1); // No re-rendering yet
+        setCount2(count2 + 1); // Component re-renders after all state updates
+    }
+    
+    return (
+        <>
+            <p>Counters: {count} {count2}</p>
+            <button onClick={increment}>Increment</button>
+        </>
+    );
+};
+
+export default App;
+```
+
+From React version 18 onward, all state updates will be batched. If you don't want to use batch updates in some cases,
+you can use the react-dom library's flushSync API to avoid batching. For example, you might have a case where you want 
+to update some state before updating the next one. It can be useful when incorporating third-party code, such a browser
+APIs.
+
+```
+import { flushSync } from "react-dom";
+
+const increment = () => {
+    flushSync( () => {
+        setCount(count + 1); // No batch update
+    });
+}
+```
+
+You should use flushSync only if it is needed, because it can affect the performance of your React app.
