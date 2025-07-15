@@ -576,3 +576,35 @@ export default memo(HeaderText);
 React renders a memorized result if the props are not changed. The React.memo() phrase also has a second argument, 
 **arePropsEquals()**, which you can use to customize rendering conditions. 
 
+### Conditional rendering 
+
+This feature can be used, for example, to show or hide some elements, handle authentication, and so on.
+
+```
+function MyComponent(props) {
+    const isLoggedin = props.isLoggedin;
+    
+    if (isLoggedin) {
+        return (
+            <Logout />
+        )
+    }
+    
+    return (
+        <Login />
+    )
+}
+```
+
+You can also implement this by using condition ? true : false logical operators.
+
+```
+function MyComponent(props) {
+    const isLoggedin = props.isLoggedin;
+    return (
+        <>
+            { isLoggedin ? <Logout /> : <Login /> }
+        </>
+    );
+}
+```
