@@ -608,3 +608,74 @@ function MyComponent(props) {
     );
 }
 ```
+
+### React hooks
+
+**Hooks** allow you to use state and some other React features in functional components. You should always call hooks
+at the top level in your React function component. You shouldn't call hooks inside loops, conditional statement, or
+nested functions. Hook names begin with the word use, followed by the purpose they serve.
+
+#### useState
+
+![8.6 Counter component](img/8.6.png)
+
+1. We create a Counter component and declare a state called count with the initial value 0. The value of the counter
+ state can be updated using the setCount function.
+
+```
+import { useState } from 'react';
+
+function Counter() {
+    // Count state with initial value 0
+    const [count, setCount] = useState(0);
+    
+    return <div></div>;
+};
+
+export default Counter;
+```
+
+2. We render a button element that increment the state by 1. We use the onClick event attribute to call the setCount
+function, and the new value is the current value plus 1. We will also render the counter state value.
+
+```
+import { useState } from 'react';
+
+function Counter() {
+    const [cound, setCount] = useState(0);
+    
+    return (
+        <div>
+            <p>Counter = {count}</p>
+            <button onClick={() => setCount(count + 1)}>
+                Incremnt
+            </button>
+        </div>
+    );
+};
+
+export default Counter;
+```
+
+When the state is updated, React re-renders the component and we can see the new count value.
+
+Note that the function must be *passed*  to an event handler, and then React will call the function only when the user
+clicks the button. If you call the function **in** the event handler, then the function is called when the component is
+rendered, which can cause an infinite loop:
+
+```
+// Correct -> Function is called when button is pressed
+<button onClick={() => setCount(count + 1)}>
+
+// Wrong -> Function is called in render -> Infinite loop
+<button onClick={setCount(count + 1)}>
+```
+
+States updates are asynchronous, so you have to be careful when a new state value depends on the current state value.
+To be sure that the latest value is used, you can pass a function to the update function. 
+
+```
+setCount(preventCount => prevCount + 1)
+```
+
+Now, the previous value is passed to the function, and the updated value is returned and saved to the count state.
