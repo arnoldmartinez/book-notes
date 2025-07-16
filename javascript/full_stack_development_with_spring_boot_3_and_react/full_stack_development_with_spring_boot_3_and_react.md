@@ -812,3 +812,36 @@ The component is rendered twice at the beginning due to Strict Mode. After the i
 (removed from the DOM), and therefore, the cleanup function is called:
 
 ![Figure 8.9: Cleanup function](img/8.9.png)
+
+#### useRef
+
+The useRef hook returns a mutable ref object that can be used, for example, to access DOM nodes.
+
+```
+const ref = useRef(initialValue)
+```
+
+Teh ref object returned has a *current* property that is initialized with the argument passed (initialValue). In the next
+example, we create a ref object called *inputRef* and initialize it to null. Then, we use the JSX element's ref property
+and pass our ref object to it. Now, it contains our input element , and we can use the current property to execute the 
+input element's focus function. Now when the button is pressed, the input element is focused:
+
+```
+import { useRef } from 'react';
+import './App.css';
+
+function App() {
+    const inputRef = useRef(null);
+    
+    return (
+        <>
+            <input ref={inputRef} />
+            <button onClick={() => inputRef.current.focus()}>
+                Focus input
+            </button>
+        </>
+    );
+}
+
+export default App;
+```
