@@ -723,3 +723,92 @@ const increment = () => {
 ```
 
 You should use flushSync only if it is needed, because it can affect the performance of your React app.
+
+#### useEffect
+
+Can be used to perform side effects in the React function component. The side effect can be, for example, a *fetch* request.
+The useEffect hook takes two arguments, as shown here:
+
+```
+useEffect(callback, [dependencies])
+```
+
+The callback function contains side-effect logic, and [dependencies] is optional array of dependencies.
+
+We have added the useEffect hook. Now, when the button is pressed, the *count* state value increases, and the component
+is re-rendered. After each render, the useEffect callback function is invoked and we can see **Hello from useEffect**
+in the console.
+
+```
+import { useEffect, useEffect } from 'react';
+
+function Counter() {
+    const [count, setCount] = useState(0);
+    
+    // Called after every render
+    useEffect(() => {
+        console.log('Hello from useEffect');
+    });
+    
+    return (
+        <>
+            <p>{count}</p>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+        </>
+    );
+};
+
+export default Counter;
+```
+
+We can see what the console now looks like, and we can see that the *useEffect* callback is invoked after each render.
+The first log row is printed after the initial render, and the rest are printed after the button is pressed two time and 
+the component is re-rendered due to state updates:
+
+![Figure 8.7: useEffect ](img/8.7.png)
+
+The *useEffect* hook has a second optional argument (a dependency array) that you can use to prevent it from running in 
+every render. In the following code snippet, we define that if the **count state** value is changed (meaning that the 
+previous and current value differ), the **useEffect** call-back function will be invoked. We can also define multiple states
+in the second argument. If any of these state values are changed, the **useEffect** hook will be invoked:
+
+```
+//Runs when count value is changed and component is re-rendered
+useEffect(() => {
+    console.log('Counter value is now ' + count);
+}, [count]);
+```
+
+If you pass an empty array as the second argument, the **useEffect** callback function runs only after the first render.
+
+```
+// Runs only after the first render
+useEffect(() => {
+    console.log('Hello from useEffect')
+}, []);
+```
+
+Now, you can see that **Hello from useEffect** is printed only once after the initial render, and if you press the button,
+the text is not printed. The message is printed twice after the first render due to **React Strict Mode**. Strict Mode 
+renders you component twice in development mode to find bugs and does not impact the production build:
+
+![Figure 8.8: useEffect with an empty array](img/8.8.png)
+
+The **useEffect** function can also return a cleanup function that will run before every effect, as shown in the following
+code snippet. Whit this mechanism, you can clean up each effect from the previous render before running the effect next
+time. It is useful when you are setting up subscription, timers, or any resource that needs to be cleaned up prevent 
+unexpected behavior. The cleanup function is also executed after you component is removed from the page (or **unmounted**):
+
+```
+useEffect(() => {
+    console.log('Hello from useEffect');
+    return () => {
+        console.log('Clean up function');
+    });
+}, [count];
+```
+
+The component is rendered twice at the beginning due to Strict Mode. After the initial render, the component is unmounted
+(removed from the DOM), and therefore, the cleanup function is called:
+
+![Figure 8.9: Cleanup function](img/8.9.png)
