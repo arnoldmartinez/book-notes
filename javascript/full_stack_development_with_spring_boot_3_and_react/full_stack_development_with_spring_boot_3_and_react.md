@@ -918,3 +918,62 @@ export default App;
 
 ![Figure 8.10: Custom hook](img/8.10.png)
 
+### The context API
+
+Passing data using props can be cumbersome if your component tree is deep and complex. **The context API** solves this 
+problem, and it is recommended for use with *global* data that you might need in multiple components throughout your
+component tree - for example, a theme or authenticated user.
+
+**Context** is created using the *createContext* method, which takes an argument that defines the default value. You can
+create your own file for the context.
+
+```
+import React from 'react';
+
+const AuthContext = React.createContext('');
+
+export default AuthContext;
+```
+
+We will use a context provider component, which makes our context available for other components. The context provider 
+component has a *value* prop that will be passed to consuming components. In the following example, we have wrapped 
+<MyComponent /> using the context provider component, so the userName value is available in our component tree under
+<MyComponent />:
+
+```
+import React from 'react';
+import AuthContext from './AuthContext';
+import MyComponent from './MyComponent';
+
+function App() {
+    // User is authenticated and we get the username
+    const userName = 'john';
+    
+    return (
+        <AuthContext.Provider value={userName}>
+            <MyComponent />
+        </AuthContext.Provider>
+    );
+};
+
+export default App;
+```
+
+Now, we can access the value provided in any component in the component tree by using the useContext() hook.
+
+```
+import React from 'react';
+import AuthContext from './AuthContext';
+
+function MyComponent() {
+    const authContext = React.useContext(AuthContext);
+    
+    return(
+        <>
+            Welcome {authContext}
+        </>
+    );
+}
+
+export default MyComponent;
+```
