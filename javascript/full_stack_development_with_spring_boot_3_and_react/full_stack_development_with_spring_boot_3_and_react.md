@@ -845,3 +845,76 @@ function App() {
 
 export default App;
 ```
+
+### Custom hooks
+
+You can build your own hooks in React. Custom hooks can also call others hooks. 
+
+1. We will create a useTitle hook that can be used to update a document title. We will define it in its own file called
+**useTitle.js**. First, we define a function, and it gets one argument named title.
+
+```
+// useTitle.js
+function useTitle(title) {
+}
+```
+
+2. Next, we will use useEffect hook to update the document title each time the title arguments is changed
+
+```
+import { useEffect } from 'react';
+
+function useTitle(title) {
+    useEffect(() => {
+        document.title = title;
+    }, [title]);
+}
+
+export default useTitle;
+```
+
+3. Now, we can start to use our custom hook. Let's use it in our counter example and print the current counter value into
+the document title. First, we have to import the useTitle hook into our Counter component.
+
+```
+import useTitle from './useTitle';
+
+function Counter() {
+    return (
+        <>
+        </>
+    );
+};
+
+export default Counter;
+```
+
+4. We will use the useTitle hook to print the count state value into the document title. We can call our hook function in
+the top level of the Counter component function, and every time the component is rendered, the useTitle hook function is
+called and we can see the current count value in the document title.
+
+```
+import  React, { useState } from 'react';
+import useTitle from './useTitle';
+
+function App() {
+    const [count, setCount] = useEstate(0);
+    useTitle(`You clicked ${count} times`);
+    
+    return (
+        <>
+            <p>Counter = {count}</p>
+            <button onClick={ () => setCount(count +1) }>
+                Increment
+            </button>
+        </>
+    );
+};
+
+export default App;
+```
+
+5. If you click the button, the count state value is also shown in the document title using custom hook.
+
+![Figure 8.10: Custom hook](img/8.10.png)
+
