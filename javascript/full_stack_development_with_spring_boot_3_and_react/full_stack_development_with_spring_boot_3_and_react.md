@@ -977,3 +977,104 @@ function MyComponent() {
 
 export default MyComponent;
 ```
+
+### Handling list with React
+
+JavaScript map() method is useful when you have to manipulate a list. The map() method creates a new array containing the
+results of calling a function on each element in the original array.
+
+```
+const arr = [1, 2, 3, 4];
+const resArr = arr.map(x => x * 2); // resArr = [2, 4, 6, 8]
+```
+
+The following example code demonstrates a component that transform an array of integers into an array of list items and 
+renders these the *ul* element
+
+```
+import React from 'react';
+
+function MyList() {
+    const data = [1, 2, ,3 ,4, 5];
+    
+    return (
+        <>
+            <ul>
+                {
+                    data.map((number) => 
+                        <li>Listitem {number}</li>)
+                }
+            </ul>
+        </>
+    );
+};
+
+export default MyList;
+```
+
+The following screenshot shows what the component looks like when it is rendered. If you open the console, you can see 
+a warning (**Each child in a list should have a unique "key" prop):
+
+![Figure 8.11: React list component](img/8.11.png)
+
+List items in React need a **unique key** that is used to detect rows that have been updated, added, or deleted. The map()
+method also has a index as a second argument, which we use to handle the warning:
+
+```
+function MyList() {
+    const data = [1, 2, 3, 4, 5];
+    
+    return (
+        <>
+            <ul>
+                {
+                    data.map((number, index) => 
+                        <li key={index}>Listitem {number}</li>)
+                }
+            </ul>
+        </>
+    );
+};
+
+export default MyList;
+```
+
+```
+The usage of index is not recommended because it can cause bugs  if the list is reordered of if you add or delete list
+items. Instead of that, you should use a unique key from the data if that exists. There are also libraries available that
+you can use to generate unique IDs, like uuid(https://github.com/uuidjs/uuid).
+```
+
+If the data is an array of objects, it would be nicer to present it in a table format. We do this in roughly the same 
+way as we did with the list, but now we just map the array to table rows (tr elements) and render these inside the table
+element, as shown in the following component code Now we have a unique ID in the data so we can use it as a key:
+
+```
+function MyTable() {
+    const data = [
+        {id: 1, brand: 'Ford', model: 'Mustang'},
+        {id: 2, brand: 'VW', model: 'Beetle'},
+        {id: 3, brand: 'Tesla', model: 'Model S'}];
+        
+    return (
+        <>
+            <table>
+                <tbody>
+                    {
+                        data.map((item) =>
+                            <tr>
+                                <td>{item.brand}</td><td>{item.model}</td>
+                            </tr>)
+                    }
+                </tbody>
+            </table>
+        </>
+    );
+};
+
+export default MyTable;
+```
+
+The following screenshot shows what the component looks like when it is rendered.
+
+![Figure 8.12: React table](img/8.12.png)
