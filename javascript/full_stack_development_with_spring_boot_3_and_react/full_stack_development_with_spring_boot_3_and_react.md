@@ -1134,3 +1134,163 @@ export default MyForm;
 ```
 
 When you press the **Submit** button, you can see the alert and the form will not be submitted.
+
+### Handling forms with React
+
+An HTML form will navigate to the next page when it is submitted. In React, often, we want to invoke a JavaScript 
+function that has access to form data after submission, and avoid navigating to the next page. We already covered how
+to avoid submission with *preventDefault()*.
+
+We create a form with one input field and **Submit** button. In order to get the value of the input field, we use the 
+*onChange* event handler. We use the *useState* hook to create a state variable called text. When the value of the input
+field is changed, the new value will be saved to the state. This component is called a **controlled component** because
+form data is handled by React. In an uncontrolled component, the form data is handled only by the DOM.
+
+The setText(event.target.value) statement gets the value from the input field and saves it to the state.
+
+```
+import { useState } from 'react';
+
+function MyForm() {
+    const [text, setText] = useState('');
+    
+    // Save input element value to state whe it has been changed
+    const handleChange = (event) => {
+        setText(event.target.value);
+    }
+    
+    const handleSubmit = (event) => {
+        alert(`You typed: ${text}`);
+        event.preventDefault();
+    }
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="text" onChange={handleChange} value={text}/>
+            <input type="submit" value="Press me" />
+        </form>
+    );
+};
+
+export default MyForm;
+```
+
+![Figure 8.13: Form component](img/8.13.png)
+
+You can also write in inline onChange handler function using JSX.
+
+```
+return (
+    <form onSubmit={handleSubmit}>
+        <input type="text" onChange={event => setText(event.target.value)} value={text} />
+        <input type="submit" value="Press me" />
+    </form>
+);
+```
+
+If we open the React Developer Tools **Components** tab with our React form app, we can inspect the current value of 
+both props and the state.
+
+![Figure 8.14: React Developer Tools](img/8.14.png)
+
+Let's look at how we can handle that using and object state. First, we introduce a state called user using the useState
+hook.
+
+```
+const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+});
+```
+
+We add name attributes to our input fields. We can utilize these in the change handler to identify which input field triggers
+the change handler. The *name* attribute value of the input element must be the same as the name of the state object 
+property in which we want to save the value, and the value attribute should be object.property.
+
+```
+<input type="text" name="lastName" onChange={handleChange} value={user.lastName} />
+```
+
+If the input field that triggers the handler is the last name field, then event.target.name is lastName, and the typed value
+will be saved to the object's lastName field. Here, we will also use the object spread notation that was introduced in the
+**Props and state** section. In this way, we can handle all input fields with the one change handler:
+
+```
+const handleChange = (event) => {
+    setUser({...user, [event.target.name]: event.target.value});
+}
+```
+
+Full source
+
+```
+import { useState } from 'react';
+
+function MyForm() {
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: ''
+    });
+    
+    // Save input box value to state when it has been changed
+    const handleChange = (event) => {
+        setUser({...user, [event.target.name]: event.target.value});
+    }
+    
+    const handleSubmit = (event) => {
+        alert(`Hello ${user.firstName} ${user.lastName}`);
+        event.preventDefault();
+    }
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>First name</label>
+            <input type="text" name="firstName" onChange={handleChange} value={user.firstName} /><br />
+            <label>Last name</label>
+            <input type="text" name="firstName" onChange={handleChange} value={user.lastName} /><br />
+            <label>Email </label>
+            <input type="email" name="email" onChange={handleChange} value={user.email} /><br />
+            <input type="submit" value="Submit" />
+        </form>
+    );
+};
+
+export default MyForm;
+```
+
+![Figure 8.15: React form component](img/8.15.png)
+
+It could also be implemented using separate states instead of one state and object. Now, we have three states, and in the
+input element's onChange event handler, we call the correct update function to save values into the states. In this case,
+we don't need the name input element's name attribute:
+
+```
+import { useState } from 'react';
+
+function MyForm() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    
+    const handleSubmit = (event) => {
+        alert(`Hello ${firstName} ${lastName}`);
+        event.preventDefault();
+    }
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>First name </label>
+            <input onChange={e => setFirstName(e.target.value)} value={firstName} /><br />
+            <label>Last name </label>
+            <input onChange={e => setLastName(e.target.value)} value={lastName} /><br />
+            <label>Email </label>
+            <input onChange={e => setEmail(e.target.value)} value={email} /><br />
+            <input type="submit" value="Press me" />
+        </form>
+    );
+};
+
+export default MyForm;
+```
