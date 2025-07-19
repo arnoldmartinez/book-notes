@@ -1078,3 +1078,59 @@ export default MyTable;
 The following screenshot shows what the component looks like when it is rendered.
 
 ![Figure 8.12: React table](img/8.12.png)
+
+### Handling events with React
+
+The difference compared to HTML event handling is that even naming uses *camelCase* in React. The following sample 
+component code adds an event listener to a button and shows an alert message when the button is pressed:
+
+```
+function MyComponent() {
+    // This is called when the button is pressed
+    const handleClick = () => {
+        alert('Button pressed');
+    }
+    return (
+        <>
+            <button onClick={handleClick}>Press Me</button>
+        </>
+    );
+};
+
+export default MyComponent;
+```
+
+You have to pass a function to the event handler instead of calling it. Now, the handleClick function is defined outside 
+the return statement, and we can refer to it using the function name
+
+```
+// Correct
+<button onClick={handleClick}>Press Me</button>
+
+// Wrong
+<button onClick={handleClick()}>Press Me</button>
+```
+
+In React, you cannot return *false* from the event handler to prevent the default behavior. Instead, you should call the
+event object's preventDefault() method. In the following example, we are using a form element, and we want to prevent
+from submission:
+
+```
+function MyForm() {
+    // This is called when the form is submitted
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevents default behaivor
+        alert('Form submit');
+    }
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="submit" value="Submit" />
+        </form>
+    );
+};
+
+export default MyForm;
+```
+
+When you press the **Submit** button, you can see the alert and the form will not be submitted.
