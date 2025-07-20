@@ -1439,3 +1439,25 @@ However, if you use optional chaining, the value undefined is printed
 ```
 console.log(person.address?.street);
 ```
+
+You can use the | operator to create a **union type**, a type that handles different types.
+
+```
+type InputType = string | number;
+// Use your type
+let name: InputType = "Hello";
+let age: InputType = 12;
+```
+
+You can also use union types to defines sets of string or numbers.
+
+```
+type Fuel = "diesel" | "gasoline" | "electric";
+type NoOfGears = 5 | 6 | 7;
+
+type Car = {
+ brand: string;
+ fuel: Fuel;
+ gears: NoOfGears;
+}
+```
