@@ -1294,3 +1294,148 @@ function MyForm() {
 
 export default MyForm;
 ```
+
+## 9 Introduction to TypeScript
+
+### Common types
+
+TypeScript will automatically define the type of a variable when you initialize it. This is called **type inference**. In
+the following example, we declare a message variable and assign it to a string value. If we try to reassign it with 
+another type, we get and error, as shown in the following image:
+
+![Figure 9.1: Type inference](img/9.1.png)
+
+TypScript has the following primitive types: string, number, and boolean. The number type represents both integer and 
+floating-point numbers. You can also set an explicit type for a variable using the following  syntax:
+
+```
+let variable_name: type;
+
+let email: string;
+let age: number;
+let isActive: boolean;
+```
+
+The variable's type can be checked using the **typeof** keyword, which return a string representing the type of the variable
+
+```
+// Check variable type
+console.log(typeof email); // Output is "string"
+typeof email === "string"; // true
+typeof age === "string"; //false
+```
+
+If you don't know the type of a variable, you can use the *unknown* type.
+
+```
+let externalValue: unknown;
+```
+
+```
+TypeScript also provides the **any** type. If you define a variable using the any type, TypeScript doesn't perform a type 
+check or inference on that variable. 
+```
+
+**Arrays** can be declared in the same way, but you have to define the type of the elements in the array.
+
+```
+let arrayOfNums: number[] = [1, 2, 3, 4];
+let animals: string[] = ["Dog", "Cat", "Tiger"];
+```
+
+You can also use the Array generic type (Array<TypeOfElement>)
+
+```
+let arrayOfNums: Array<number> = [1, 2, 3, 4];
+let animals: Array<string> = ["Dog", "Cat", "Tiger"];
+```
+
+Type inference also works with objects. If you create the following object, TypeScript creates an object with these inferred
+types: id: number, name: string, and email: string.
+
+```
+const student = {
+    id: 1,
+    name: "Lisa Smith",
+    email: "lisa.s@mail.com",
+};
+```
+
+You can also define an object using the **interface** or **type** keyword, which describe the object's shape.
+
+```
+// Using interface
+interface Student {
+    id: number;
+    name: string;
+    email: string;
+};
+
+// Or using type
+
+type Student = {
+    id: number,
+    name: string,
+    email: string;
+};
+```
+
+Then, you can declare an object that conforms to the Student interface or type:
+
+```
+const myStudent: Student = {
+    id: 1,
+    name: "Lisa Smith ",
+    email: "lisa.s@mail.com",
+};
+```
+
+You can define optional properties by using the question mark (?) at the end of the property name.
+
+```
+type Student = {
+    id: number,
+    name: string,
+    email?: string;
+};
+// Student object without email
+const myStudent: Student = {
+    id: 1,
+    name: "Lisa Smith"
+}
+```
+
+The **optional chaining operator(?.) can be used to safely access object properties and methods that can be null or undefined
+without causing an error.
+
+```
+type Person = {
+    name: string,
+    email: string,
+    address?: {
+        street: string,
+        city: string;
+    }
+}
+```
+
+You can create an object based on the Person type that doesn't have the address property defined
+
+```
+const person: Person = {
+    name: "John Johnson",
+    email: "j.j@mail.com"
+}
+```
+
+If you try to access the address property, un error is thrown
+
+```
+console.log(person.address.stree);
+```
+
+However, if you use optional chaining, the value undefined is printed
+
+```
+console.log(person.address?.street);
+```
