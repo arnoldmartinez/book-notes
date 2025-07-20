@@ -1419,7 +1419,7 @@ type Person = {
 }
 ```
 
-You can create an object based on the Person type that doesn't have the address property defined
+You can create an object based on the Person type that doesn't have the address property defined.
 
 ```
 const person: Person = {
@@ -1428,7 +1428,7 @@ const person: Person = {
 }
 ```
 
-If you try to access the address property, un error is thrown
+If you try to access the address property, un error is thrown.
 
 ```
 console.log(person.address.stree);
@@ -1460,4 +1460,43 @@ type Car = {
  fuel: Fuel;
  gears: NoOfGears;
 }
+```
+
+### Functions
+
+```
+function sayHello(name: string) {
+    console.log("Hello " + name);
+}
+```
+
+You can also use union types in function parameters.
+
+```
+function checkId(id: string | number) {
+  if (typeof id  === "string")
+      // do something
+  else
+      // do something else
+}
+```
+
+A function's return type can be declared in the following way:
+
+```
+function calcSum(x: number, y: number): number {
+  return x + y;
+}
+```
+
+Arrow function work in the same way in TypeScript.
+
+```
+const calcSum = (x:number, y:number): number => x + y;
+```
+
+If the arrow function returns nothing, you can use the **void** keyword
+
+```
+const sayHello = (name: string): void => console.log("Hello " + name);
 ```
