@@ -1500,3 +1500,153 @@ If the arrow function returns nothing, you can use the **void** keyword
 ```
 const sayHello = (name: string): void => console.log("Hello " + name);
 ```
+
+### Using TypeScript features with React
+### State and props
+In React, you have to define the type of components props, so we can use type or interface to define the prop type.
+
+```
+function HelloComponent({ name, age }) {
+  return (
+    <>
+      Hello {name}, you are {age} years old!
+    </>
+  );
+}
+
+export default HelloComponent;
+```
+
+Now, we can render our HelloComponent and pass props to it:
+
+```
+// imports...
+function App() {
+  return (
+    <HelloComponent name="Mary" age={12} />
+  )
+}
+
+export default App;
+```
+
+If we use TypeScript, we can first create a type that describe our props:
+
+```
+type HelloProps = {
+  name: string,
+  age: number,
+};
+```
+
+Then, we can use our HelloProps type in the component props:
+
+```
+function HelloComponent({ name, age } : HelloProps) {
+  return (
+    <>
+      Hello {name}, you are {age} years old!
+    </>
+  );
+}
+
+export default HelloComponent;
+```
+
+If there are optional props, you can mark these using the question mark in your type when you define the props
+
+```
+type HelloProps = {
+  name: string;
+  age?: number;
+};
+```
+
+Now, you can use your component with or without age props
+
+If you want to pass a function using the props, you can define it in your type.
+
+```
+// Function without parameters
+type HelloProps = {
+  name: string;
+  age: number;
+  fn: () => void;
+};
+
+// Function with parameters
+type HelloProps = {
+  name: string;
+  age: number;
+  fn: (msg: string) => void;
+};
+```
+
+Quite often, you will want to use the same type in multiple files in your app. It is a good practice to extract 
+types into their own file and export them:
+
+```
+// types.ts file
+export type HelloProps = {
+  name: string;
+  age: number;
+};
+```
+
+Then, you can import the type into any component where you need it:
+
+```
+// Import type and use it in your component
+import { HelloProps } from ./types;
+
+function HelloComponent({ name, age }: HelloProps) {
+  return(
+    <>
+      Hello {name}, you are {age} years old!
+    </>
+  );
+}
+
+export default HelloComponent;
+```
+
+There is a standard React type, FC (**function component**), that we can use with arrow functions. This type takes a generic
+argument that specifies the prop type, which is HelloProps in our case:
+
+```
+import React from 'react';
+import { HelloProps } from './types';
+
+const HelloComponent: React.FC<HelloProps> = ({ name, age }) => {
+  return(
+    <>
+      Hello {name}, you are {age} years old!
+    </>
+  );
+};
+
+export default HelloComponent;
+```
+
+If you want to initialize your state to null or undefined, you can use the union operator, and the syntax is the 
+following
+
+```
+const [message, setMessage] = useState<string | undefined>(undefined);
+```
+
+If you want to allow null values, you can use a union to allow either a User object or a null value:
+
+```
+type User = {
+  id: number;
+  name: string;
+  email: number;
+};
+
+// Use type with state, the initial value is an empty User object
+const [user, setUser] = useState<User>({} as User);
+
+// If null values are accepted
+const [user, setUser] = useState<User | null>(null);
+```
