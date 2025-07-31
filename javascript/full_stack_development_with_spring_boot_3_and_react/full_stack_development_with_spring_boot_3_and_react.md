@@ -1650,3 +1650,78 @@ const [user, setUser] = useState<User>({} as User);
 // If null values are accepted
 const [user, setUser] = useState<User | null>(null);
 ```
+
+## Consuming the REST API with React
+### Promises
+The traditional way to handle an asynchronous operation is to use callback functions for the success or failure of the 
+operation.
+
+```
+function doAsyncCall(success, failure) {
+  // Do some API call
+  if (SUCCEED)
+    success(resp);
+  else
+    failure(err);
+}
+
+success(response) {
+  // Do something with response
+}
+
+failure(error) {
+  // Handle error
+}
+
+doAsyncCall(success, failure);
+```
+
+A promise is an object that represents the result of an asynchronous operation. Promises are non-blocking.
+
+With promises, we can execute asynchronous calls if the API or library we are using to send requests supports promises.
+In the following example, an asynchronous call is made. When the response is returned, the callback function inside the 
+**then** method is executed, taking the response as an argument.
+
+```
+doAsyncCall()
+  .then(response => // Do something with the response)
+```
+
+The **then** method returns a promise. A promise can be in one of three states:
+
+```
+- Pending: Initial state
+- Fullfilled (or Resolved): Successful operation
+- Rejected: Failed operation
+```
+
+The following code demonstrates a simple object, where **setTimeout** simulates an asynchronous operation.
+
+```
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resulve("Hello");
+  }, 500);
+});
+```
+
+The promise is in the pending state when the promise object is created and while the timer is running. After 500 milliseconds,
+the **resolve** function is called with the value **"Hello"** and the promise enters the fulfilled state. If there is an error,
+the promise state changes to rejected, and that can be handled using the **catch()** function.
+
+You can chain many instances of **then** together, which means that you can run multiple asynchronous operations one after another:
+```
+doAsyncCall()
+  .then(response => // Get some data from the response)
+  .then(data => // Do something with the data);
+```
+
+You can also add error handling to promises by using **catch()**. The **catch()** is executed if any error occurs in the 
+preceding **then** chain
+
+```
+doAsyncCall()
+  .then(response => // Get some data from the response)
+  .then(data => // Do something with data)
+  .catch(error => console.error(error))  
+```
