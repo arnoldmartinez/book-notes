@@ -1725,3 +1725,32 @@ doAsyncCall()
   .then(data => // Do something with data)
   .catch(error => console.error(error))  
 ```
+
+### Async and wait
+The **async/await** method is based on promises. To use **async/await**, you must define **async()** function that can 
+contain **await** expressions
+
+```
+const doAsyncCall = async () => {
+  const response = await fetch('http://someapi.com');
+  const data = await response.json();
+  // Do something with the data
+}
+```
+
+The **fetch()** function returns a promise, but now it is handled using **await** instead of the **then** method.
+
+For error handling, you can use **try...catch** with **async/await**.
+
+```
+const doAsyncCall= async () => {
+  try {
+    const response = await fetch('http://someapi.com');
+    const data await response.json();
+    // Do something with the data 
+  }
+  catch(err) {
+    console.error(err);
+  }
+}
+```
