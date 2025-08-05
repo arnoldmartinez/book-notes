@@ -1754,3 +1754,73 @@ const doAsyncCall= async () => {
   }
 }
 ```
+
+### Using the fetch API
+The idea of the **fetch** API is similar to the traditional **XMLHttpRequest** or Query Ajax API, but the **fetch** API
+also support promises. You don't have to install any libraries if you are using **fetch** and it is supported by modern
+browsers natively.
+
+The **fetch** API provides a **fetch()** method that has one mandatory argument: the path of the resource you are calling.
+
+```
+fetch('https://someapi.com')
+.then(response => response.json())
+.then(data => console.log(data))
+catch(error => console.log(error))
+```
+
+The **fetch()** method returns a promise that contains the response. You can use the **json()** method to extract the 
+JSON data from a response, and this method also returns a promise.
+
+The **response** that is passed to the first **then** statement is an object that contains the properties **ok** and 
+**status**, which can use to check whether the request was successful. 
+
+```
+fetch('http://someapi.com')
+  .then(response => {
+    if (response.ok)
+      // Successful request -> Status 2XX
+    else 
+      // Something went wrong -> Error response
+  })
+  .then(data => console.log(data))
+  .catch(error => console.log(error))
+```
+
+To use another HTTP method, such as **POST**, you must define it in the second argument of the **fetch()** method. The
+second argument is an object where you can define multiple request settings.
+
+```
+fetch('http://someapi.com', {method: 'POST'})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log(error))
+```
+
+You can also add headers inside the second argument. The following **fetch()** call contains the 
+**'Content-Type': 'application/json'** header.
+
+```
+fetch('http://someapi.com',
+  {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'}
+  }
+.then(response => response.json))
+.then(data => console.log(data))
+.catch(error => console.log(error))
+```
+
+If you have to send JSON-encoded data inside the request body.
+
+```
+fetch('http://someapi.com',
+  {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  }
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.log(error))
+```
