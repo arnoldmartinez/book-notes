@@ -1824,3 +1824,40 @@ fetch('http://someapi.com',
 .then(data => console.log(data))
 .catch(error => console.log(error))
 ```
+
+## Useful third-party Components for React
+### Installing third-party React components
+
+One good site to search for components on is JS.coach (https://js.coach/). Another good source for React components is
+**awesome-react-components:https://github.com/brillout/awesome-react-components.
+
+If you want to install a specific version of a component, you can use the following command:
+
+```
+npm install component_name@version
+```
+
+And if you want to remove an installed component from your React app, you can use the following command:
+
+```
+npm uninstall component_name
+```
+
+You can see what components are outdated by using the following command in your project root directory. If the output is
+empty, all components are in the latest version:
+
+```
+npm outdated
+```
+
+You can update all outdated components 
+
+```
+npm update
+```
+
+You can get the list of your project dependencies by using the following **npm** command:
+
+```
+npm list
+```
