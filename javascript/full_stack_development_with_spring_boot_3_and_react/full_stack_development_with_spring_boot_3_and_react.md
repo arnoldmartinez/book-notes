@@ -1861,3 +1861,274 @@ You can get the list of your project dependencies by using the following **npm**
 ```
 npm list
 ```
+
+### Working with AG Grid
+AG Grid (https://www.ag-grid.com/) is a flexible data grid component for React apps. It is
+like a spreadsheet that you can use to present your data.
+
+1. To install the **ag-grid** community component.
+
+```
+npm install ag-grid-community ag-grid-react
+```
+
+2. Open the **App.tsx** file and remove the **table** element inside the **return** statement.
+
+```
+import { useState } from 'react';
+import axios from 'axios';
+import './App.css';
+
+type Repository = {
+ id: number;
+ full_name: string;
+ html_url: string;
+};
+
+function App() {
+ const [keyword, setKeyword] = useState('');
+ const [repodata, setRepodata] = useState<Repository[]>([]);
+ const handleClick = () => {
+   
+   axios.get<{ items: Repository[] }>(`https://api.gitub.com/search/repositories?q=${keyword})
+    .then(response => setRepodata(response.data.items))
+    catch(err => console.error(err));
+ }
+ 
+ return  (
+  <>
+   <iput value={keyword} onChange={e => setKeyword(e.target.value)} />
+   <button onClick={handleClick}>Fetch</button>
+  </>
+ );
+}
+
+export default App;
+```
+
+3. Import the **ag-grid** component and stylesheets by adding the following lines in 
+**App.tsx** file.
+
+```
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-material.css';
+```
+
+4. We will add the imported **AgGridRect** component to the **return** statement. To fill
+the **ag-grid** component with data, you have to pass the **rowData** prop to the component.
+
+```
+return (
+ <div className="App">
+  <input value={keyword} onChange={e => setKeyword(e.target.value)} />
+  <button onClick={fetchData}>Fetch</button>
+  <div className="ag-theme-material" style={{height:500, width:850}}>
+   <AgGridReact rowData={repository} />
+  </div>
+ </div>
+);
+```
+
+5. We will define columns for the **ag-grid**. We will define a state called **columnDefs**, which
+is an array of column definition objects. **ag-grid** provides a **ColDef** type that we can use here.
+In a column object, you have to define the data accessor by using the required **field** props. The
+**field** value is the property name in the REST API response data that the column should display:
+
+```
+import { ColDef } from 'ag-grid-community';
+const [columnDefs] = useState<ColDef[]>([
+ {field: 'id'},
+ {field: 'full_name'},
+ {field: 'html_url'},
+]);
+```
+
+6. Finally, we will use the AG Grid **columnDefs** prop to define these columns.
+
+```
+<AgGridReact
+ rowData={data}
+ columnDefs={columnDefs}
+```
+
+### Managing routing with React Router
+
+React Router (https://github.com/ReactTraining/react-router) provides a package called **react-router-dom**.
+React Router uses URL-based routing, which means that we can define which component is rendered
+based on the URL.
+
+```
+npm install react-router--dom@6
+```
+
+The **react-router-dom** library provides components that are used to implement routing. **BrowserRouter** 
+is the router for web-based applications. The **Route** component renders the defined component if the
+given locations match.
+
+![Component tree](img/ch-13/11.png)
+
+8. Sorting and filtering can be enabled using the **sortable** and **filter** props in **ag-grid** columns.
+
+```
+const [columnDefs] = useState<ColDef[]>([
+ {field: 'id', sortable: true, filter: true},
+ {field: 'full_name', sortable: true, filter: true},
+ {field: 'html_url', sortable: true, filter: true}
+]);
+```
+
+![Component tree](img/ch-13/11.5.png)
+
+9. You can also enable paging and set the page size in **ag-grid** by using the
+**pagination** and **paginationPageSize** props
+
+```
+<AgGridReact
+ rowData={data}
+ columnDefs={columnDefs}
+ pagination={true}
+ paginationPageSize={8}
+/>
+```
+
+![ag-grid pagination](img/ch-13/11.6.png)
+
+10. The **cellRenderer** prop can be used to customize the content of a table cell. The
+following example shown how you can render a button in a grid cell
+
+```
+// Import ICellRendererParams
+import { ICellRendererParams } from 'ag-grid-community';
+// Modify columnDefs
+const columnDefs = useState<ColDef[]>([
+  {field: 'id', sortable: true, filter: true},
+  {field: 'full_name', sortable: true, filter: true},
+  {field: 'html_url', sortable: true, filter: true},
+  {
+    field: 'full_name',
+    cellRenderer: (params: ICellRendererParams) => (
+      <button
+        onClick={() => alert(params.value)}>
+        Press me
+      </button>
+    ),
+  },
+]);
+```
+
+The function in the cell renderer accepts params as an argument. The **param.value** will be the value of the **full_name**
+cell, which is defined in the **field** property of the column definition. If you need access to all values in a row, 
+you can use **params.row**, which is the whole row object.
+
+![Figure 11.7: Grid with buttons](img/11.7.png)
+
+### Using the Material UI component library
+
+Material UI (https://mui.com/), or MUI, is the React component library that implements
+Google's Material Design language (https://m2.material.io/design).  
+
+A small shopping list app and style the UI using MUI components.
+
+![Figure 11.8: Shopping List UI](img/11.8.png)
+
+1. Create a new React app called **shoppinglist**
+
+```
+npm create vite@latest
+cd shoppinglist
+npm install
+```
+
+2. Install MUI in the project root folder
+
+```
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+To use Roboto fonts, add the following line inside the **head** element of your **index.html** file:
+
+```
+<link
+rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=\
+          Roboto:300,400,500,700&display=swap"
+/>
+```
+
+4. Open the **App.tsx** file and remove all the code inside the fragment(**<></>**).
+
+```
+// App.tsx
+import './App.css'
+function App() {
+  return (
+    <>
+    </>
+  );
+}
+```
+
+5. MUI provides different layout components, and the basic layout component is **Container**. You can
+specify the maximum width of a container using the **maxWidth** prop; the default value is **lg**(large).
+
+```
+import Container from '@mui/material/Container';
+import './App.css';
+function App() {
+  return (
+    <Container>
+    </Container>
+  );
+}
+export default App;
+```
+
+6. Remove the **index.css** file import from the **main.tsx** file so that we get full screen for our app.
+
+```
+// main.tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css' // REMOVE THIS LINE
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+```
+
+7. Import the **AppBar**, **ToolBar**, and **Typography** components into your **App.tsx** file.
+
+```
+import { useState } from 'react';
+import Container from '@mui/material/Container';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import './App.css'
+```
+
+8. Render the **AppBar** by adding the following code to your **App** component's **return** statement.
+
+```
+function App() {
+  return (
+    <Container>
+      <AppBar position='static'>
+        <Toolbar>
+          <Typography variant="h6">
+            Shopping List
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </Container>
+  );
+}
+```
+
+9. It should now look like this:
+
+![Figure 11.9: AppBar component](img/11.9.png)
+
