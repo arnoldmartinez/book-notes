@@ -2132,3 +2132,13 @@ function App() {
 
 ![Figure 11.9: AppBar component](img/11.9.png)
 
+10. We need one array state to save the shopping list items. We have to create a type for
+for the shopping items, **Items**.
+
+```
+// App.tsx
+export type Item = {
+  product: string;
+  amount: string;
+}
+```
