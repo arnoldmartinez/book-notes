@@ -2142,3 +2142,218 @@ export type Item = {
   amount: string;
 }
 ```
+
+11. Create a state called **items**, whose type is an array of **items** types:
+
+```
+const [items, setItems] = useState<Item[]>([]);
+```
+
+12. Then, create a function that adds a new item to the **items** state. We will use spread notation
+(...) to add a new item at the beginning of an existing array:
+
+```
+const addItem = (item: Item) => {
+  setItems([item, ...items]);
+}
+```
+
+13. Create a new file called AddItem.tsx in the root folder of the app. The **AddItem**
+component function receives **props** from its parent component.
+
+```
+function AddItem(props) {
+  return(
+    <></>
+  );
+}
+export default AddItem;
+```
+
+We'll add two input fields, **product** and **amount**, and a button that calls the **App**
+component's **addItem** function. To be able to call the **addItem** function, which is in the
+**App** component, we have to pass it in **props** when rendering the **AddItem** component.
+Outside the modal **Dialog** component, we'll add a button that opens the model form where the
+use can enter a new shopping item.
+
+14. Add the following imports to your **AddItem.tsx** file:
+
+```
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from  '@mui/material/DialogTitle';
+```
+
+We will declare one state called **open** and two functions to open and close the modal dialog (**handleOpen** and **handleClose**).
+
+```
+// AddItem.tsx
+// Import useState
+import { useState } from 'react';
+// Add state, handleOpen and handleClose functions
+const [open, setOpen] = useState(false);
+const handleOpen = () => {
+  setOpen(true);
+}
+
+const handleClose = () => {
+  setOpen(false);
+}
+```
+
+We have one button the dialog that will be visible when the component is rendered for the first time.
+When the button is pressed, it calls the **handleOpen** function, which opens the dialog.
+
+```
+return (
+  <>
+    <Button onClick={handleOpen}>
+      Add Item
+    </Button>
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>New Item</DialogTitle>
+      <DialogContent>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button onClick={addItem}>
+          Add
+        </Button>
+      </DialogActions>
+    </Dialog>
+  </>
+);
+```
+
+17. To collect data from a user, we have to declare one more state. This state is use to store
+a shopping item that the user enters.
+
+```
+// Add the following import to AddItem.tsx
+import { Item } from './App';
+```
+
+18. The type of the state is **Item**, and we initialize it to an empty **Item** object
+
+```
+// item state
+const [item, setItem] = useState<Item>({
+  product: '',
+  amount: '',
+});
+```
+
+19. Inside the **DialogContent** component, we'll add two inputs to collect data from the user. We'll
+use the **TextField** MUI Component. The **Value** props of the text fields must be the same as the state
+where we want to save the typed value. The **onChange** event listener saves the typed value to the **item**
+state when the user types something into the text fields. In the **product** field, the value is saved to the
+**item.product** property, and in the **amount** field, value is saved to the **item.amount** property.
+
+```
+<DialogContent>
+  <TextField value={ item.product} margin="dense" onChange={e => setItem({...item, product: e.target.value}) } label="Product" fullWidth />
+  <TextField value={ item.amount} margin="dense" onChange={e => setItem({...item, amount: e.target.value}) } label="Amount" fullWidth />
+</DialogContent>
+```
+
+20. We have to create a function that calls the **addItem** function that we receive in the props. The function takes a 
+new shopping item as an argument. First, we define a type for the props. The **addItem** function that is passed from the
+**App* component accepts one argument of the type **Item**, and the function doesn't return anything.
+
+```
+// AddItem.tsx
+type AddItemProps = {
+  addItem: (item: Item) => void;
+}
+function AddItem(props:AddItemProps) {
+  const [open, setOpen] = useState(false);
+  // Continues...
+}
+```
+
+21. Since we get the **Item** function from the props, we can call it using the **props** keyword. We'll also call the 
+**handleClose** function.
+
+```
+// Calls addItem function and passes item state into it
+const addItem = () => {
+  props.addItem(item);
+  // Clear text fields and close modal dialog
+  setItem({ product: '', amount: '' });
+  handleClose();
+}
+```
+
+22. We have to import it into our App.tsx file and render it there.
+
+```
+import AddItem from './AddItem';
+```
+
+23. Add the AddItem component to the return statement in the **App.tsx** file. Pass the **addItem** function in a prop to
+the **AddItem** component.
+
+```
+// App.tsx
+return (
+  <Container>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6">
+          Shopping List
+        </Typography>
+      </Toolbar>
+    </AppBar>
+    <AddItem addItem={addItem} />
+  </Container
+);
+```
+
+24. You will see the modal from opening, and you can type in a new item, as illustrated in the following screenshot.
+
+![Figure 11.10 Modal Dialog](img/11.10.png)
+
+25. We'll add a list to the **App** component that shows the shopping items.
+
+```
+// App.tsx
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+```
+
+26. We'll render the **List** component. 
+
+```
+// App.tsx
+return (
+  <Container>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6">
+          Shopping List
+        </Typography>
+      </Toolbar>
+    </AppBar>
+    <AddItem addItem={addItem} />
+    <List>
+      {
+        items.map((item, index) =>
+          <ListItem key={index} divider>
+            <ListItemText primary={item.product} secondary={item.amount} />
+          </ListItem>
+        )
+      }
+    </List>
+  </Container>
+);
+```
+
+27. The UI looks like this:
+
+![Figure 11.11: Shopping List]()
