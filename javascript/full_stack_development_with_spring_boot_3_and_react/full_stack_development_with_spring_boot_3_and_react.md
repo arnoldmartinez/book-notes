@@ -2356,4 +2356,4 @@ return (
 
 27. The UI looks like this:
 
-![Figure 11.11: Shopping List]()
+![Figure 11.11: Shopping List](img/11.11.png)
