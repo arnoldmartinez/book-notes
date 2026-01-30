@@ -139,3 +139,147 @@ Add the following above the **<application>** tag to the AndroidManifest.xml fil
 ```
 <uses-permission android:name="android.permission.INTERNET" />
 ```
+### The app-level build.gradle.kts file 
+
+```
+plugins {
+	alias(libs.plugins.android.application)
+	alias(libs.plugins.kotlin.android)
+	alias(libs.plugins.kotlin.compose)
+}
+android {
+	namespace = "com.example.myapplication"
+	compileSdk = 35
+	defaultConfig {
+		applicationId = "com.example.myapplication"
+		minSdk = 24
+		targetSdk = 35
+		versionCode = 1
+		versionName = "1.0"
+		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+	}
+	buildTypes {
+		release {
+			isMinifyEnabled = false
+			proguardFiles(
+				getDefaultProguardFile("proguard-android-optimize.txt"),
+				"proguard-rules.pro"
+			)
+		}
+	}
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_11
+		targetCompatibility = JavaVersion.VERSION_11
+	}
+	kotlinOptions {
+		jvmTarget = "11"
+	}
+	buildFeatures {
+		compose = true
+	}
+}
+dependencies {...}
+
+```
+
+* **namespace**: This is set from the package name you specified when creating the project. It will 
+  be used for generating build and resource identifiers.
+* **compileSdk**: This is used to define the API level the app has been compiled with, and the app
+  can use the features of this API and lower.
+* **defaultConfig**: This is the base configuration of your app.
+* **applicationId**: This is set to your app's package and is the app identifier that is used on
+  Google Play to uniquely identify your app. It can be changed to be different from the package name
+  if required, but once you upload your app to the Google Play it is used to uniquely identify your 
+  app and can't be changed.
+* **minSdk**: This is the minimum API level your app supports.
+* **targetSdk**: This is the API level your built app is intended to work on and has been tested 
+  with.
+* **versionCode**: This specifies the version code of your app. Every time an update need to the app,
+  the version code needs to be increased by one or more.
+* **versionName**: A user-friendly version name that usually follows semantic versioning of X.Y.Z, 
+  where X is the major version, Y is the minur version, and Z is the path version, for example, 1.0.3.
+* **testInstrumentationRunner**: This is the best runner to use for your UI tests.
+* **buildTypes**: Under **buildTypes**, a release is added that configures to create a **release** 
+  build. The **isMinifyEnabled** value, if set to **true**, will shrink your app size by removing 
+  any unused code, as well as obfuscating your app. This obfuscating step changes the name of the 
+  source code references to values such as **a.b.c()**. This makes your code less prone to reverse
+  engineering and further reduces the size of the build app.
+* **compileOptions**: This is the language level of the Java source code(**sourceCompatibility**) and
+  byte code (**targetCompatibility**).
+* **kotlinOptions**: This is the **jvm** library that the **kotlin gradle** plugin should use.
+* **buildFeatures**: This is where you configure specifig parts of your build. In this case, we are
+  specifying that we will use **compose** to create the UI rather than the legacy view system.
+* The **Dependencies** blocks specifies the libraries your app uses on top of the Android platform
+  SDK, as show here below:
+
+```
+dependencies {
+	// Kotlin extensions denoted by .ktx
+	// Android Kotlin language features
+	implementation(libs.androidx.core.ktx)
+	implementation(libs.androidx.lifecycle.runtime.ktx)
+	// Jetpack Compose UI
+	implementation(libs.androidx.activity.compose)
+	// Jetpack Compose Versioning Library
+	implementation(platform(libs.androidx.compose.bom))
+	// All Android UI SDK and tooling
+	implementation(libs.androidx.ui)
+	implementation(libs.androidx.ui.graphics)
+	implementation(libs.androidx.ui.tooling.preview)
+	implementation(libs.androidx.material3)
+	// Standard Test libraries for unit tests
+	testImplementation(libs.junit)
+	// UI Test runner
+	androidTestImplementation(libs.androidx.junit)
+	// Libraries for creating Android UI tests
+	androidTestImplementation(libs.androidx.espresso.core)
+	androidTestImplementation(libs.androidx.ui.test.junit4)
+	// AndroidX Versioning Library
+	androidTestImplementation(platform(
+	libs.androidx.compose.bom))
+	// Debugging Tooling
+	debugImplementation(libs.androidx.ui.tooling)
+	debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+```
+
+The dependencies listed above are a simplified version of the full details of the dependencies. This
+is configured in a file called the **libs.version.toml** configuration file. Tom's Obvious, Minimal 
+Language (TOML) files are standard industry files designed to make configuring complex dependencies 
+as simple as possible.
+
+**settings.gradle**, which initially looks like this:
+
+```
+pluginManagement {
+	repositories {
+		google {
+			content {
+				includeGroupByRegex("com\\.android.*")
+				includeGroupByRegex("com\\.google.*")
+				includeGroupByRegex("androidx.*")
+			}
+		}
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		google()
+		mavenCentral()
+	}
+}
+rootProject.name = "My Application"
+include(":app")
+```
+
+When you first create a project with Android Studio, there will only be one app module, 
+**include(:app,)**, you can add new modules that are dedicated to containing the source of a 
+feature rather than packaging it in the main **app** module.
+
+Settings the value of **RepositoriesMode.FAIL_ON_PROJECT_REPOS ensure that all dependencies 
+repositories are defined here; otherwise, a build error will be triggered.
+
