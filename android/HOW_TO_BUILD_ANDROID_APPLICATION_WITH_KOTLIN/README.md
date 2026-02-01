@@ -418,3 +418,182 @@ MaterialTheme(
 You can style all your composables in one place instead of individually setting them on
 each composable. There is always the option to set a tyle on a composable to override the
 global setting if you wish.
+
+## Android application structure
+
+```
+import…
+class MainActivity : ComponentActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enableEdgeToEdge()
+    setContent {
+      MyApplicationTheme {
+        Scaffold(
+          modifier = Modifier.fillMaxSize()
+        ) { innerPadding ->
+          Greeting(
+            name = "Android",
+            modifier = Modifier
+              .padding(innerPadding)
+          )
+        }
+      }
+    }
+  }
+}
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+  Text(
+    text = "Hello $name!",
+    modifier = modifier
+  )
+}
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+  MyApplicationTheme {
+    Greeting("Android")
+  }
+}
+```
+
+The import statements include the libraries and the source of what this activity uses. The **class
+MainActivity : ComponentActivity()** class header creates a class that extends **ComponentActivity**.
+In Kotlin, the **:** character is used for both deriving from a class (inheritance) and implementing
+an interface.
+
+**ComponentActivity** is the foundational base class for activities that provides commonly used 
+component and feature support for Android development.
+
+Android activities have many callback functions you can override at different points of the 
+activity's life. This known as the **activity lifecycle**.
+
+If you want to display a screen with a layout, you override the **onCreate** function.
+
+```
+override fun onCreate(savedInstanceState: Bundle?)
+```
+
+The **override** keyword in Kotlin specifies that you are providing a specific implementation. The
+**fun** keyword stands for function. The **savedInstanceState: Bundle?** parameter is Android's 
+mechanism for restoring previously saved state. For that simple activity, you haven't stored any
+state, so this value will be **null**. The question mark, **?**, that follows the type declares that 
+this type can be **null**.
+
+**The super.onCreate(savedInstanceState)** line calls through to the overriden method of the base
+class, and finally, **setContent {...}** loads the content we want to display.
+
+**enableEdgeToEdge()** allows your app to use the largest screen display it can to create an immersive
+experience for your app.
+
+**MyApplicationTheme** applies the material theme hierarchically to the composable contained within it.
+The first composable is **Scaffold**, which provides the structure of how the screen is made up. It can
+contain top bars, bottom bars, and other features. Currently, it just holds an example composable
+called **Greeting**, which display a **Text** composable. **innerPadding** accounts for managing the
+padding between the container, which is **Scaffold** and its content here. This is usually to ensure 
+that the content does not overlap with UI elements, such as the status bar.
+
+The **Modifier** object enables you to add a host of appearance and behaviors to your composable, and
+the **@Preview** annotation enables you to preview the result of those changes without having to run
+the app up. 
+
+In the folder structure:
+
+* **ExampleInstrumentedTest**: This is an example UI test. You can check and verify the flow and 
+  structure of your app by running tests on the UI when the app is running.
+* **ExampleUnitTest**: This is an example unit test.
+* **ic_launcher_background.xml** and **ic_launcher_foreground.xml**: These two files make up the
+  launcher icon of your app in vector format, which will be used by the **ic_launcher.xml** 
+  launcher icon file in Android API 26 (Oreo) and above.
+
+The **ic_launcher.webp** file are the **.webp** launcher icons that have an icon for every different
+density of devices. 
+
+```
+Google created density bucket resources so that the correct image would be selected to be displayed 
+depending on how many dots per inch (DPI) the device has. These density bucket resources are created
+as folders that contain the resources for the different densities.
+```
+
+The different density qualifiers and their details are as follow:
+
+* **nodpi**: Density-independent resources
+* **ldpi**: Low-density screens of 120 DPI
+* **mdpi**: Medium-density screens of 160 DPI (the baseline)
+* **hdpi**: High-density screens of 240 DPI
+* **xhdpi**: Extra-high-density screens of 320 DPI
+* **xxhdpi**: Extra-extra-high-density screens of 480 DPI
+* **xxxhdpi**: Extra-extra-extra-high-density screens of 640 DPI
+* **tvdpi**: Resources for televisions (approx. 213 DPI)
+
+The pixel 9 virtual device has a density of 422 DPI, so it uses resources from the 
+extra-extra-high-density bucket(**xxhdpi**), which is the closest match. Android has a preference for 
+scaling down resources to best match density buckets, so a device with 400 DPI, which is halfway
+between the **xhdpi** and **xxhdpi** buckets, is likely, to display the 480 DPI asset from the **xxhdpi**
+bucket.
+
+To create alternative bitmap drawables for different densities, you should follow the **3:4:6:8:12:16**
+scaling ratio between the six primary densities. For example, if you have a bitmat drawable that's 
+**48x48** pixels for medium-density screens, all the different sizes should be as follows:
+
+* **36x36** (**0.75x**) for low density (**ldpi**)
+* **48x48** (**1.0x**) for medium density (**mdpi**)
+* **72x72** (**1.5x**) for high density (**hdpi**)
+* **96x96** (**2.0x**) for extra-high density (**xhdpi**)
+* **144x144** (**3.0**) for extra-extra-high density (**xxhdpi**)
+* **192x192** (**4.0**) for extra-extra-extra-high density (**xxxhdpi**)
+
+For a comparison of these physical launcher icons per density bucket.
+
+![Comparison of principal density bucket launcher image sizes](img/1.22-Comparison-of-principal-density-bucket-launcher-image-sizes.jpg)
+
+```
+Launcher icons are made slightly larger than normal images within your app, as they will be used  by
+the device's launcher. As some launchers can scale up the image, this ensures there is no pixelation
+or blurring of the image.
+```
+
+In the **colors.xml** file, you define the colors you want to use in hexadecimal format XML layouts:
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="purple_200">#FFBB86FC</color>
+<color name="purple_500">#FF6200EE</color>
+<color name="purple_700">#FF3700B3</color>
+<color name="teal_200">#FF03DAC5</color>
+<color name="teal_700">#FF018786</color>
+<color name="black">#FF000000</color>
+<color name="white">#FFFFFFFF</color>
+</resources>
+```
+
+If no transparency is required, you can omit the first two characters. So, to create fully blue and
+50% transparent blue colors, here's the format:
+
+```
+<color name="colorBlue">#0000FF</color>
+<color name="colorBlue50PercentTransparent">#770000FF</color>
+```
+
+The **strings.xml** file lists all the text displayed in the app:
+
+```
+<resources>
+<string name="app_name">My Application</string>
+</resources>
+```
+
+Common styles you would like to use in the XML UI display throughout your app are added to 
+**themes.xml**:
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style
+    name="Theme.MyApplication"
+    parent="android:Theme.Material.Light.NoActionBar"
+  />
+</resources>
+```
